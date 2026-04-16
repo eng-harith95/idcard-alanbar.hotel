@@ -10,27 +10,27 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --card-bg: #0a0a0a;
-      --strip-color1: #0b4a38;
-      --strip-color2: #1a7a5e;
-      --card-shadow-color: #1a7a5e18;
-      --txt-hotel-ar: #c9a84c;
-      --txt-hotel-en: #cccccc;
-      --txt-name-ar: #ffffff;
-      --txt-name-en: #cccccc;
-      --txt-dept-ar: #ffffff;
-      --txt-dept-en: #bbbbbb;
-      --txt-title-ar: #ffffff;
-      --txt-title-en: #bbbbbb;
-      --txt-emp-id: #c9a84c;
-      --divider-color: #1a7a5e66;
-      --photo-border: #1a7a5e;
-      --back-title: #c9a84c;
-      --back-tb: #c9a84c;
-      --back-tp: #bbbbbb;
-      --back-logo-border: #1a7a5e;
-      --qr-border: #1a7a5e;
-      --drag-handle-bg: #1a7a5e;
+      --card-bg: #e6e6e6;
+      --strip-color1: #5a3a0a;
+      --strip-color2: #c9a84c;
+      --card-shadow-color: #c9a84c18;
+      --txt-hotel-ar: #5d4504;
+      --txt-hotel-en: #5d4504;
+      --txt-name-ar: #000000;
+      --txt-name-en: #000000;
+      --txt-dept-ar: #000000;
+      --txt-dept-en: #000000;
+      --txt-title-ar: #000000;
+      --txt-title-en: #000000;
+      --txt-emp-id: #c7a64b;
+      --divider-color: #c9a84c66;
+      --photo-border: #c9a84c;
+      --back-title: #b3933f;
+      --back-tb: #000000;
+      --back-tp: #000000;
+      --back-logo-border: #c9a84c;
+      --qr-border: #e6e6e6;
+      --drag-handle-bg: #c9a84c;
     }
 
     body {
@@ -238,10 +238,10 @@
     .den { color: var(--txt-dept-en); font-family: 'Montserrat', sans-serif; font-weight: 600; }
     .tar { font-weight: 700; color: var(--txt-title-ar); direction: rtl; }
     .ten { color: var(--txt-title-en); font-family: 'Montserrat', sans-serif; font-weight: 600; }
-    .emp-id-badge { margin-top: 4px; background: #111; border: 1px solid #1a7a5e55; border-radius: 6px; padding: 3px 10px; display: inline-block; }
+    .emp-id-badge { margin-top: 4px; background: #000000; border: 1px solid #1a7a5e55; border-radius: 6px; padding: 3px 10px; display: inline-block; }
     .emp-id-text { font-family: 'Montserrat', sans-serif; font-size: 11px; color: var(--txt-emp-id); letter-spacing: 2px; font-weight: 700; }
     /* BACK */
-    .bbody { flex: 1; padding: 10px 14px 12px; text-align: center; display: flex; flex-direction: column; align-items: center; overflow: hidden; position: relative; }
+    .bbody { flex: 1; padding: 10px 14px 12px; text-align: center; display: flex; flex-direction: column; align-items: center; overflow: hidden; position: relative; direction: ltr; }
     .blogo { object-fit: contain; display: block; margin-bottom: 6px; }
     .btit { font-weight: 700; color: var(--back-title); letter-spacing: 2px; font-family: 'Montserrat', sans-serif; margin-bottom: 6px; }
     .tblock { margin-bottom: 6px; width: 100%; }
@@ -319,19 +319,19 @@
         <div class="ci">
           <label>لون الخلفية</label>
           <div class="crow">
-            <input type="color" id="cl_bg" value="#0a0a0a" oninput="cv('--card-bg',this.value);hx('hx_bg',this.value)">
-            <span class="chex" id="hx_bg">#0a0a0a</span>
+            <input type="color" id="cl_bg" value="#e6e6e6" oninput="cv('--card-bg',this.value);hx('hx_bg',this.value)">
+            <span class="chex" id="hx_bg">#e6e6e6</span>
           </div>
         </div>
         <div class="swatches">
-          <div class="sw-bg active" style="background:#0a0a0a" onclick="setBg('#0a0a0a',this)"></div>
+          <div class="sw-bg" style="background:#0a0a0a" onclick="setBg('#0a0a0a',this)"></div>
           <div class="sw-bg" style="background:#0a0a2a" onclick="setBg('#0a0a2a',this)"></div>
           <div class="sw-bg" style="background:#1a0000" onclick="setBg('#1a0000',this)"></div>
           <div class="sw-bg" style="background:#001a0a" onclick="setBg('#001a0a',this)"></div>
           <div class="sw-bg" style="background:#1a1200" onclick="setBg('#1a1200',this)"></div>
           <div class="sw-bg" style="background:#1a1a2e" onclick="setBg('#1a1a2e',this)"></div>
           <div class="sw-bg" style="background:#2a2a2a" onclick="setBg('#2a2a2a',this)"></div>
-          <div class="sw-bg" style="background:#ffffff;border:1px solid #ccc" onclick="setBg('#ffffff',this)"></div>
+          <div class="sw-bg active" style="background:#ffffff;border:1px solid #ccc" onclick="setBg('#ffffff',this)"></div>
         </div>
       </div>
 
@@ -341,37 +341,37 @@
           <div class="ci">
             <label>بداية الشريط</label>
             <div class="crow">
-              <input type="color" id="cl_s1" value="#0b4a38" oninput="cv('--strip-color1',this.value);hx('hx_s1',this.value)">
-              <span class="chex" id="hx_s1">#0b4a38</span>
+              <input type="color" id="cl_s1" value="#5a3a0a" oninput="cv('--strip-color1',this.value);hx('hx_s1',this.value)">
+              <span class="chex" id="hx_s1">#5a3a0a</span>
             </div>
           </div>
           <div class="ci">
             <label>نهاية الشريط</label>
             <div class="crow">
-              <input type="color" id="cl_s2" value="#1a7a5e" oninput="cv('--strip-color2',this.value);hx('hx_s2',this.value);syncAcc()">
-              <span class="chex" id="hx_s2">#1a7a5e</span>
+              <input type="color" id="cl_s2" value="#c9a84c" oninput="cv('--strip-color2',this.value);hx('hx_s2',this.value);syncAcc()">
+              <span class="chex" id="hx_s2">#c9a84c</span>
             </div>
           </div>
           <div class="ci">
             <label>إطار الصورة</label>
             <div class="crow">
-              <input type="color" id="cl_pb" value="#1a7a5e" oninput="cv('--photo-border',this.value);hx('hx_pb',this.value)">
-              <span class="chex" id="hx_pb">#1a7a5e</span>
+              <input type="color" id="cl_pb" value="#c9a84c" oninput="cv('--photo-border',this.value);hx('hx_pb',this.value)">
+              <span class="chex" id="hx_pb">#c9a84c</span>
             </div>
           </div>
           <div class="ci">
             <label>خط الفاصل</label>
             <div class="crow">
-              <input type="color" id="cl_dv" value="#1a7a5e" oninput="cv('--divider-color',this.value+'66');hx('hx_dv',this.value)">
-              <span class="chex" id="hx_dv">#1a7a5e</span>
+              <input type="color" id="cl_dv" value="#c9a84c" oninput="cv('--divider-color',this.value+'66');hx('hx_dv',this.value)">
+              <span class="chex" id="hx_dv">#c9a84c</span>
             </div>
           </div>
         </div>
         <div class="swatches">
-          <div class="sw-ac active" style="background:linear-gradient(135deg,#0b4a38,#1a7a5e)" onclick="setAcc('#0b4a38','#1a7a5e',this)" title="أخضر فندقي"></div>
+          <div class="sw-ac" style="background:linear-gradient(135deg,#0b4a38,#1a7a5e)" onclick="setAcc('#0b4a38','#1a7a5e',this)" title="أخضر فندقي"></div>
           <div class="sw-ac" style="background:linear-gradient(135deg,#1a3a6e,#2a6abf)" onclick="setAcc('#1a3a6e','#2a6abf',this)" title="أزرق ملكي"></div>
           <div class="sw-ac" style="background:linear-gradient(135deg,#6e1a1a,#bf2a2a)" onclick="setAcc('#6e1a1a','#bf2a2a',this)" title="أحمر داكن"></div>
-          <div class="sw-ac" style="background:linear-gradient(135deg,#5a3a0a,#c9a84c)" onclick="setAcc('#5a3a0a','#c9a84c',this)" title="ذهبي"></div>
+          <div class="sw-ac active" style="background:linear-gradient(135deg,#5a3a0a,#c9a84c)" onclick="setAcc('#5a3a0a','#c9a84c',this)" title="ذهبي"></div>
           <div class="sw-ac" style="background:linear-gradient(135deg,#3a1a6e,#7a4abf)" onclick="setAcc('#3a1a6e','#7a4abf',this)" title="بنفسجي"></div>
           <div class="sw-ac" style="background:linear-gradient(135deg,#1a4a6e,#2aaabf)" onclick="setAcc('#1a4a6e','#2aaabf',this)" title="فيروزي"></div>
           <div class="sw-ac" style="background:linear-gradient(135deg,#444,#999)" onclick="setAcc('#444444','#999999',this)" title="رمادي"></div>
@@ -384,25 +384,25 @@
       <div class="cpanel">
         <div class="cpanel-title">الواجهة الأمامية</div>
         <div class="cgrid">
-          <div class="ci"><label>اسم الفندق ع</label><div class="crow"><input type="color" id="cl_har" value="#c9a84c" oninput="cv('--txt-hotel-ar',this.value);hx('hx_har',this.value)"><span class="chex" id="hx_har">#c9a84c</span></div></div>
-          <div class="ci"><label>اسم الفندق إ</label><div class="crow"><input type="color" id="cl_hen" value="#cccccc" oninput="cv('--txt-hotel-en',this.value);hx('hx_hen',this.value)"><span class="chex" id="hx_hen">#cccccc</span></div></div>
-          <div class="ci"><label>اسم الموظف ع</label><div class="crow"><input type="color" id="cl_nar" value="#ffffff" oninput="cv('--txt-name-ar',this.value);hx('hx_nar',this.value)"><span class="chex" id="hx_nar">#ffffff</span></div></div>
-          <div class="ci"><label>اسم الموظف إ</label><div class="crow"><input type="color" id="cl_nen" value="#cccccc" oninput="cv('--txt-name-en',this.value);hx('hx_nen',this.value)"><span class="chex" id="hx_nen">#cccccc</span></div></div>
-          <div class="ci"><label>القسم ع</label><div class="crow"><input type="color" id="cl_dar" value="#ffffff" oninput="cv('--txt-dept-ar',this.value);hx('hx_dar',this.value)"><span class="chex" id="hx_dar">#ffffff</span></div></div>
-          <div class="ci"><label>القسم إ</label><div class="crow"><input type="color" id="cl_den" value="#bbbbbb" oninput="cv('--txt-dept-en',this.value);hx('hx_den',this.value)"><span class="chex" id="hx_den">#bbbbbb</span></div></div>
-          <div class="ci"><label>المسمى ع</label><div class="crow"><input type="color" id="cl_tar" value="#ffffff" oninput="cv('--txt-title-ar',this.value);hx('hx_tar',this.value)"><span class="chex" id="hx_tar">#ffffff</span></div></div>
-          <div class="ci"><label>المسمى إ</label><div class="crow"><input type="color" id="cl_ten" value="#bbbbbb" oninput="cv('--txt-title-en',this.value);hx('hx_ten',this.value)"><span class="chex" id="hx_ten">#bbbbbb</span></div></div>
-          <div class="ci"><label>رقم الموظف</label><div class="crow"><input type="color" id="cl_eid" value="#c9a84c" oninput="cv('--txt-emp-id',this.value);hx('hx_eid',this.value)"><span class="chex" id="hx_eid">#c9a84c</span></div></div>
+          <div class="ci"><label>اسم الفندق ع</label><div class="crow"><input type="color" id="cl_har" value="#5d4504" oninput="cv('--txt-hotel-ar',this.value);hx('hx_har',this.value)"><span class="chex" id="hx_har">#5d4504</span></div></div>
+          <div class="ci"><label>اسم الفندق إ</label><div class="crow"><input type="color" id="cl_hen" value="#5d4504" oninput="cv('--txt-hotel-en',this.value);hx('hx_hen',this.value)"><span class="chex" id="hx_hen">#5d4504</span></div></div>
+          <div class="ci"><label>اسم الموظف ع</label><div class="crow"><input type="color" id="cl_nar" value="#000000" oninput="cv('--txt-name-ar',this.value);hx('hx_nar',this.value)"><span class="chex" id="hx_nar">#000000</span></div></div>
+          <div class="ci"><label>اسم الموظف إ</label><div class="crow"><input type="color" id="cl_nen" value="#000000" oninput="cv('--txt-name-en',this.value);hx('hx_nen',this.value)"><span class="chex" id="hx_nen">#000000</span></div></div>
+          <div class="ci"><label>القسم ع</label><div class="crow"><input type="color" id="cl_dar" value="#000000" oninput="cv('--txt-dept-ar',this.value);hx('hx_dar',this.value)"><span class="chex" id="hx_dar">#000000</span></div></div>
+          <div class="ci"><label>القسم إ</label><div class="crow"><input type="color" id="cl_den" value="#000000" oninput="cv('--txt-dept-en',this.value);hx('hx_den',this.value)"><span class="chex" id="hx_den">#000000</span></div></div>
+          <div class="ci"><label>المسمى ع</label><div class="crow"><input type="color" id="cl_tar" value="#000000" oninput="cv('--txt-title-ar',this.value);hx('hx_tar',this.value)"><span class="chex" id="hx_tar">#000000</span></div></div>
+          <div class="ci"><label>المسمى إ</label><div class="crow"><input type="color" id="cl_ten" value="#000000" oninput="cv('--txt-title-en',this.value);hx('hx_ten',this.value)"><span class="chex" id="hx_ten">#000000</span></div></div>
+          <div class="ci"><label>رقم الموظف</label><div class="crow"><input type="color" id="cl_eid" value="#c7a64b" oninput="cv('--txt-emp-id',this.value);hx('hx_eid',this.value)"><span class="chex" id="hx_eid">#c7a64b</span></div></div>
         </div>
       </div>
 
       <div class="cpanel">
         <div class="cpanel-title">الظهر</div>
         <div class="cgrid">
-          <div class="ci"><label>عنوان الشروط</label><div class="crow"><input type="color" id="cl_bt" value="#c9a84c" oninput="cv('--back-title',this.value);hx('hx_bt',this.value)"><span class="chex" id="hx_bt">#c9a84c</span></div></div>
-          <div class="ci"><label>عناوين البنود</label><div class="crow"><input type="color" id="cl_tb2" value="#c9a84c" oninput="cv('--back-tb',this.value);hx('hx_tb2',this.value)"><span class="chex" id="hx_tb2">#c9a84c</span></div></div>
-          <div class="ci"><label>نص البنود</label><div class="crow"><input type="color" id="cl_tp" value="#bbbbbb" oninput="cv('--back-tp',this.value);hx('hx_tp',this.value)"><span class="chex" id="hx_tp">#bbbbbb</span></div></div>
-          <div class="ci"><label>إطار QR</label><div class="crow"><input type="color" id="cl_qr" value="#1a7a5e" oninput="cv('--qr-border',this.value);hx('hx_qr',this.value)"><span class="chex" id="hx_qr">#1a7a5e</span></div></div>
+          <div class="ci"><label>عنوان الشروط</label><div class="crow"><input type="color" id="cl_bt" value="#b3933f" oninput="cv('--back-title',this.value);hx('hx_bt',this.value)"><span class="chex" id="hx_bt">#b3933f</span></div></div>
+          <div class="ci"><label>عناوين البنود</label><div class="crow"><input type="color" id="cl_tb2" value="#000000" oninput="cv('--back-tb',this.value);hx('hx_tb2',this.value)"><span class="chex" id="hx_tb2">#000000</span></div></div>
+          <div class="ci"><label>نص البنود</label><div class="crow"><input type="color" id="cl_tp" value="#000000" oninput="cv('--back-tp',this.value);hx('hx_tp',this.value)"><span class="chex" id="hx_tp">#000000</span></div></div>
+          <div class="ci"><label>إطار QR</label><div class="crow"><input type="color" id="cl_qr" value="#e6e6e6" oninput="cv('--qr-border',this.value);hx('hx_qr',this.value)"><span class="chex" id="hx_qr">#e6e6e6</span></div></div>
         </div>
       </div>
 
@@ -412,33 +412,33 @@
       <div class="sec">معلومات الفندق</div>
       <div class="fg"><label>اسم الفندق (عربي)</label><input type="text" id="hotelAr" value="فنـدق الانبـار الـدولي" oninput="upd()"></div>
       <div class="fg"><label>Hotel Name (English)</label><input type="text" id="hotelEn" value="ANBAR INTERNATIONAL HOTEL" oninput="upd()">
-        <div class="fs-row"><span>حجم</span><input type="range" min="6" max="18" value="8" oninput="setFs('hnen',this.value)"><span class="fs-val" id="hnen-v">8px</span></div>
+        <div class="fs-row"><span>حجم</span><input type="range" min="6" max="18" value="14" oninput="setFs('hnen',this.value)"><span class="fs-val" id="hnen-v">14px</span></div>
       </div>
 
       <div class="sec">معلومات الموظف</div>
-      <div class="fg"><label>الاسم (عربي)</label><input type="text" id="nameAr" placeholder="الاسم" oninput="upd()">
-        <div class="fs-row"><span>حجم</span><input type="range" min="10" max="28" value="16" oninput="setFs('enar',this.value)"><span class="fs-val" id="enar-v">16px</span></div>
+      <div class="fg"><label>الاسم (عربي)</label><input type="text" id="nameAr" value="حارث موفق جاسم" oninput="upd()">
+        <div class="fs-row"><span>حجم</span><input type="range" min="10" max="28" value="18" oninput="setFs('enar',this.value)"><span class="fs-val" id="enar-v">18px</span></div>
       </div>
-      <div class="fg"><label>Name (English)</label><input type="text" id="nameEn" placeholder="Name" oninput="upd()">
-        <div class="fs-row"><span>حجم</span><input type="range" min="8" max="22" value="11" oninput="setFs('enen',this.value)"><span class="fs-val" id="enen-v">11px</span></div>
+      <div class="fg"><label>Name (English)</label><input type="text" id="nameEn" value="Harith M. muafaq" oninput="upd()">
+        <div class="fs-row"><span>حجم</span><input type="range" min="8" max="22" value="16" oninput="setFs('enen',this.value)"><span class="fs-val" id="enen-v">16px</span></div>
       </div>
-      <div class="fg"><label>القسم (عربي)</label><input type="text" id="deptAr" placeholder="القسم" oninput="upd()">
-        <div class="fs-row"><span>حجم</span><input type="range" min="8" max="24" value="13" oninput="setFs('dar',this.value)"><span class="fs-val" id="dar-v">13px</span></div>
+      <div class="fg"><label>القسم (عربي)</label><input type="text" id="deptAr" value="تكنلوجيا المعلومات" oninput="upd()">
+        <div class="fs-row"><span>حجم</span><input type="range" min="8" max="24" value="16" oninput="setFs('dar',this.value)"><span class="fs-val" id="dar-v">16px</span></div>
       </div>
-      <div class="fg"><label>Department (English)</label><input type="text" id="deptEn" placeholder="Department" oninput="upd()">
-        <div class="fs-row"><span>حجم</span><input type="range" min="6" max="18" value="9" oninput="setFs('den',this.value)"><span class="fs-val" id="den-v">9px</span></div>
+      <div class="fg"><label>Department (English)</label><input type="text" id="deptEn" value="I.T. Department" oninput="upd()">
+        <div class="fs-row"><span>حجم</span><input type="range" min="6" max="18" value="14" oninput="setFs('den',this.value)"><span class="fs-val" id="den-v">14px</span></div>
       </div>
-      <div class="fg"><label>المسمى الوظيفي (عربي)</label><input type="text" id="titleAr" placeholder="مدير قسم" oninput="upd()">
-        <div class="fs-row"><span>حجم</span><input type="range" min="8" max="24" value="13" oninput="setFs('tar',this.value)"><span class="fs-val" id="tar-v">13px</span></div>
+      <div class="fg"><label>المسمى الوظيفي (عربي)</label><input type="text" id="titleAr" value="مهندس" oninput="upd()">
+        <div class="fs-row"><span>حجم</span><input type="range" min="8" max="24" value="16" oninput="setFs('tar',this.value)"><span class="fs-val" id="tar-v">16px</span></div>
       </div>
-      <div class="fg"><label>Job Title (English)</label><input type="text" id="titleEn" placeholder="Job Title" oninput="upd()">
-        <div class="fs-row"><span>حجم</span><input type="range" min="6" max="18" value="9" oninput="setFs('ten',this.value)"><span class="fs-val" id="ten-v">9px</span></div>
+      <div class="fg"><label>Job Title (English)</label><input type="text" id="titleEn" value="A.V. Engineer" oninput="upd()">
+        <div class="fs-row"><span>حجم</span><input type="range" min="6" max="18" value="14" oninput="setFs('ten',this.value)"><span class="fs-val" id="ten-v">14px</span></div>
       </div>
       <div class="fg">
         <label>رقم الموظف (4 أرقام)</label>
         <div style="display:flex;align-items:center;gap:6px;">
-          <span style="font-size:12px;color:#c9a84c;font-family:'Montserrat',sans-serif;font-weight:700;white-space:nowrap;">AIH NO</span>
-          <input type="text" id="empNum" value="0000" maxlength="4" placeholder="0000"
+          <span style="font-size:12px;color:#c9a84c;font-family:'Montserrat',sans-serif;font-weight:700;white-space:nowrap;">AIH No.</span>
+          <input type="text" id="empNum" value="0159" maxlength="4" placeholder="0000"
             style="width:70px;text-align:center;font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;letter-spacing:4px;color:#c9a84c;"
             oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4);upd()">
         </div>
@@ -473,19 +473,19 @@
         <div class="upl" style="margin-top:4px;border-color:#c9a84c44;"><input type="file" accept="image/*" onchange="loadQRImg(event)"><span id="qrImgLbl">🔲 رفع صورة QR Code</span></div>
         <div class="qr-size-row">
           <span>الحجم</span>
-          <input type="range" min="40" max="150" value="60" id="qrSize" oninput="updateQRSize()">
-          <span class="qr-size-val" id="qrSizeVal">60px</span>
+          <input type="range" min="40" max="150" value="109" id="qrSize" oninput="updateQRSize()">
+          <span class="qr-size-val" id="qrSizeVal">109px</span>
         </div>
       </div>
 
       <div class="sec">نص الشروط</div>
       <div class="fg"><label>Identification</label>
         <textarea id="t1" oninput="upd()">Carry the ID card at all times during working hours for identification purposes.</textarea>
-        <div class="fs-row"><span>حجم</span><input type="range" min="6" max="16" value="9" oninput="setFs('tp1',this.value)"><span class="fs-val" id="tp1-v">9px</span></div>
+        <div class="fs-row"><span>حجم</span><input type="range" min="6" max="16" value="15" oninput="setFs('tp1',this.value)"><span class="fs-val" id="tp1-v">15px</span></div>
       </div>
       <div class="fg"><label>Authorized Use</label>
         <textarea id="t2" oninput="upd()">The ID card is strictly for official use and should not be shared or used for unauthorized purposes.</textarea>
-        <div class="fs-row"><span>حجم</span><input type="range" min="6" max="16" value="9" oninput="setFs('tp2',this.value)"><span class="fs-val" id="tp2-v">9px</span></div>
+        <div class="fs-row"><span>حجم</span><input type="range" min="6" max="16" value="15" oninput="setFs('tp2',this.value)"><span class="fs-val" id="tp2-v">15px</span></div>
       </div>
 
       <div class="save-area">
@@ -497,8 +497,8 @@
         <button class="btn b3" style="width:100%;margin-bottom:6px;padding:9px;" onclick="saveBoth()">💾 حفظ الاثنين معاً</button>
         <div class="save-scale-row">
           <span>جودة الحفظ</span>
-          <input type="range" min="1" max="5" value="3" id="saveScale" oninput="document.getElementById('saveScaleVal').textContent=this.value+'x'">
-          <span class="save-scale-val" id="saveScaleVal">3x</span>
+          <input type="range" min="1" max="5" value="5" id="saveScale" oninput="document.getElementById('saveScaleVal').textContent=this.value+'x'">
+          <span class="save-scale-val" id="saveScaleVal">5x</span>
         </div>
         <button class="print-btn" onclick="window.print()">🖨 طباعة الاثنين</button>
       </div>
@@ -521,18 +521,18 @@
         <div class="card" id="cardFront">
           <div class="strip" id="stripF"></div>
           <div class="cbody">
-            <img class="clogo" id="logoF" src="logo.png" alt="" >
+            <img class="clogo" id="logoF" src="logo.png" alt="">
             <div class="hnar" id="c-hotelAr" style="font-size:14px">فنـدق الانبـار الـدولي</div>
-            <div class="hnen" id="c-hotelEn" style="font-size:8px">ANBAR INTERNATIONAL HOTEL</div>
+            <div class="hnen" id="c-hotelEn" style="font-size:14px">ANBAR INTERNATIONAL HOTEL</div>
             <div class="pframe" id="c-photo"><div class="pph">الصورة<br>الشخصية</div></div>
-            <div class="enar" id="c-nameAr" style="font-size:16px">حسن حياوي حسن</div>
-            <div class="enen" id="c-nameEn" style="font-size:11px">Hassan H. Hassan</div>
+            <div class="enar" id="c-nameAr" style="font-size:18px">حارث موفق جاسم</div>
+            <div class="enen" id="c-nameEn" style="font-size:16px">Harith M. muafaq</div>
             <div class="divl"></div>
-            <div class="dar" id="c-deptAr" style="font-size:13px">المتابعة</div>
-            <div class="den" id="c-deptEn" style="font-size:9px">Follow-up Department</div>
-            <div class="tar" id="c-titleAr" style="font-size:13px">مدير قسم</div>
-            <div class="ten" id="c-titleEn" style="font-size:9px">Department Manager</div>
-            <div class="emp-id-badge"><span class="emp-id-text" id="c-empId">AIH NO   0000</span></div>
+            <div class="dar" id="c-deptAr" style="font-size:16px">تكنلوجيا المعلومات</div>
+            <div class="den" id="c-deptEn" style="font-size:14px">I.T. Department</div>
+            <div class="tar" id="c-titleAr" style="font-size:16px">مهندس</div>
+            <div class="ten" id="c-titleEn" style="font-size:14px">A.V. Engineer</div>
+            <div class="emp-id-badge"><span class="emp-id-text" id="c-empId">AIH NO.   0159</span></div>
           </div>
         </div>
       </div>
@@ -543,25 +543,24 @@
         <div class="card" id="cardBack">
           <div class="strip" id="stripB"></div>
           <div class="bbody">
-            <img class="blogo" id="logoB" 
-            src="/logo.png" alt="">
+            <img class="blogo" id="logoB" src="logo.png" alt="">
             <div class="btit" style="font-size:10px">TERMS &amp; CONDITIONS</div>
             <div class="tblock">
               <span class="tb" style="font-size:9px">Identification:</span>
-              <p class="tp" id="c-t1" style="font-size:9px">Carry the ID card at all times during working hours for identification purposes.</p>
+              <p class="tp" id="c-t1" style="font-size:15px">Carry the ID card at all times during working hours for identification purposes.</p>
             </div>
             <div class="tblock">
               <span class="tb" style="font-size:9px">Authorized Use:</span>
-              <p class="tp" id="c-t2" style="font-size:9px">The ID card is strictly for official use and should not be shared or used for unauthorized purposes.</p>
+              <p class="tp" id="c-t2" style="font-size:15px">The ID card is strictly for official use and should not be shared or used for unauthorized purposes.</p>
             </div>
             <div class="back-overlay" id="backOverlay">
-              <div class="draggable-item" id="dragBackImg" style="left:8px;top:8px;">
+              <div class="draggable-item" id="dragBackImg" style="left:219px;top:16px;">
                 <div class="drag-handle"><span>✥ صورة</span></div>
                 <div class="back-img-frame" id="backImgFrame" style="width:60px;height:60px;"><div class="back-img-ph">صورة<br>الظهر</div></div>
               </div>
-              <div class="draggable-item" id="dragQR" style="right:8px;top:8px;">
+              <div class="draggable-item" id="dragQR" style="left:25px;top:302px;">
                 <div class="drag-handle"><span>✥ QR</span></div>
-                <div class="qr-frame" id="qrFrame" style="width:60px;height:60px;"><div class="qr-ph">QR<br>Code</div></div>
+                <div class="qr-frame" id="qrFrame" style="width:109px;height:109px;"><div class="qr-ph">QR<br>Code</div></div>
               </div>
             </div>
           </div>
@@ -602,15 +601,15 @@ function setAcc(c1, c2, el) {
 function syncAcc() {
   var c2 = document.getElementById('cl_s2').value;
   cv('--photo-border', c2); cv('--divider-color', c2 + '66');
-  cv('--back-logo-border', c2); cv('--qr-border', c2); cv('--drag-handle-bg', c2);
+  cv('--back-logo-border', c2); cv('--drag-handle-bg', c2);
 }
 
-// ===== RESET COLORS =====
+// ===== RESET COLORS — يعيد إلى إعدادات المستخدم الافتراضية =====
 var DEF = {
-  cl_bg:'#0a0a0a', cl_s1:'#0b4a38', cl_s2:'#1a7a5e', cl_pb:'#1a7a5e', cl_dv:'#1a7a5e',
-  cl_har:'#c9a84c', cl_hen:'#cccccc', cl_nar:'#ffffff', cl_nen:'#cccccc',
-  cl_dar:'#ffffff', cl_den:'#bbbbbb', cl_tar:'#ffffff', cl_ten:'#bbbbbb',
-  cl_eid:'#c9a84c', cl_bt:'#c9a84c', cl_tb2:'#c9a84c', cl_tp:'#bbbbbb', cl_qr:'#1a7a5e'
+  cl_bg:'#e6e6e6', cl_s1:'#5a3a0a', cl_s2:'#c9a84c', cl_pb:'#c9a84c', cl_dv:'#c9a84c',
+  cl_har:'#5d4504', cl_hen:'#5d4504', cl_nar:'#000000', cl_nen:'#000000',
+  cl_dar:'#000000', cl_den:'#000000', cl_tar:'#000000', cl_ten:'#000000',
+  cl_eid:'#c7a64b', cl_bt:'#b3933f', cl_tb2:'#000000', cl_tp:'#000000', cl_qr:'#e6e6e6'
 };
 var VMAP = {
   cl_bg:'--card-bg', cl_s1:'--strip-color1', cl_s2:'--strip-color2',
@@ -630,8 +629,8 @@ function resetColors() {
     if(id === 'cl_dv') cv(v, hex + '66');
     else cv(v, hex);
   });
-  document.querySelectorAll('.sw-bg').forEach(function(e,i){ e.classList.toggle('active', i===0); });
-  document.querySelectorAll('.sw-ac').forEach(function(e,i){ e.classList.toggle('active', i===0); });
+  document.querySelectorAll('.sw-bg').forEach(function(e,i){ e.classList.toggle('active', i===7); });
+  document.querySelectorAll('.sw-ac').forEach(function(e,i){ e.classList.toggle('active', i===3); });
   syncAcc();
 }
 
@@ -703,10 +702,10 @@ function updateBackImgSize(){ var sz=parseInt(document.getElementById('backImgSi
 function loadQRImg(e) {
   var f=e.target.files[0]; if(!f) return;
   var r=new FileReader();
-  r.onload=function(ev){ var sz=parseInt(document.getElementById('qrSize').value)||60; var frame=document.getElementById('qrFrame'); frame.style.width=sz+'px'; frame.style.height=sz+'px'; frame.innerHTML='<img src="'+ev.target.result+'" style="width:100%;height:100%;object-fit:contain;display:block;">'; document.getElementById('qrImgLbl').textContent='✓ تم رفع QR Code'; };
+  r.onload=function(ev){ var sz=parseInt(document.getElementById('qrSize').value)||109; var frame=document.getElementById('qrFrame'); frame.style.width=sz+'px'; frame.style.height=sz+'px'; frame.innerHTML='<img src="'+ev.target.result+'" style="width:100%;height:100%;object-fit:contain;display:block;">'; document.getElementById('qrImgLbl').textContent='✓ تم رفع QR Code'; };
   r.readAsDataURL(f);
 }
-function updateQRSize(){ var sz=parseInt(document.getElementById('qrSize').value)||60; document.getElementById('qrSizeVal').textContent=sz+'px'; var frame=document.getElementById('qrFrame'); frame.style.width=sz+'px'; frame.style.height=sz+'px'; }
+function updateQRSize(){ var sz=parseInt(document.getElementById('qrSize').value)||109; document.getElementById('qrSizeVal').textContent=sz+'px'; var frame=document.getElementById('qrFrame'); frame.style.width=sz+'px'; frame.style.height=sz+'px'; }
 
 // ===== DRAG =====
 var isLocked=true;
@@ -727,7 +726,7 @@ function toggleLock(){
 })();
 
 // ===== SAVE =====
-function getScale(){ return parseInt(document.getElementById('saveScale').value)||3; }
+function getScale(){ return parseInt(document.getElementById('saveScale').value)||5; }
 function saveFront(){ html2canvas(document.getElementById('cardFront'),{backgroundColor:null,scale:getScale(),useCORS:true,logging:false}).then(function(c){ var a=document.createElement('a'); a.download='anbar-front.png'; a.href=c.toDataURL('image/png'); a.click(); }); }
 function saveBack(){
   document.querySelectorAll('.drag-handle').forEach(function(el){el.style.display='none';});
