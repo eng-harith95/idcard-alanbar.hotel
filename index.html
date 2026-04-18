@@ -1,660 +1,891 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>فندق الأنبار الدولي - بطاقات الموظفين</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&family=Montserrat:wght@400;600;700&display=swap');
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فندق الأنبار الدولي — مولّد بطاقات الموظفين</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --card-bg:#f1f1f1;
+  --strip1:#5a3a0a;--strip2:#c9a84c;
+  --shadow:#c9a84c18;
+  --hotel-ar:#5d4504;--hotel-en:#5d4504;
+  --name-ar:#1a1400;--name-en:#1a1400;
+  --dept-ar:#2a2000;--dept-en:#2a2000;
+  --title-ar:#2a2000;--title-en:#2a2000;
+  --emp-id:#ffffff;
+  --divider:#c9a84c66;
+  --photo-border:#c9a84c;
+  --back-title:#b3933f;--back-tb:#1a1400;--back-tp:#2a2000;
+  --qr-border:#c9a84c;
+  --drag-handle:#c9a84c;
+  --accent:#c9a84c;
+  --ui-bg:#f0ede6;
+  --ui-sidebar:#ffffff;
+  --ui-panel:#f7f4ef;
+  --ui-border:#d8d0be;
+  --ui-border-accent:#c9a84c55;
+  --ui-text:#2a2000;
+  --ui-muted:#7a6840;
+  --ui-label:#5a4820;
+  --ui-green:#1a7a5e;
+  --ui-green-dim:#1a7a5e33;
+}
 
-    :root {
-      --card-bg: #e6e6e6;
-      --strip-color1: #5a3a0a;
-      --strip-color2: #c9a84c;
-      --card-shadow-color: #c9a84c18;
-      --txt-hotel-ar: #5d4504;
-      --txt-hotel-en: #5d4504;
-      --txt-name-ar: #000000;
-      --txt-name-en: #000000;
-      --txt-dept-ar: #000000;
-      --txt-dept-en: #000000;
-      --txt-title-ar: #000000;
-      --txt-title-en: #000000;
-      --txt-emp-id: #c7a64b;
-      --divider-color: #c9a84c66;
-      --photo-border: #c9a84c;
-      --back-title: #b3933f;
-      --back-tb: #000000;
-      --back-tp: #000000;
-      --back-logo-border: #c9a84c;
-      --qr-border: #e6e6e6;
-      --drag-handle-bg: #c9a84c;
-    }
+body{
+  font-family:'Tajawal',sans-serif;
+  background:var(--ui-bg);
+  color:var(--ui-text);
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
 
-    body {
-      font-family: 'Tajawal', sans-serif;
-      background: #12121f;
-      color: #eee;
-      overflow: hidden;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+.topbar{
+  background:linear-gradient(135deg,#4a2e05,#7a5010);
+  border-bottom:2px solid var(--strip2);
+  height:54px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px;
+  flex-shrink:0;
+  gap:12px;
+  box-shadow:0 2px 12px #00000033;
+}
+.logo-mark{
+  width:32px;height:32px;border-radius:8px;
+  background:linear-gradient(135deg,var(--strip2),#f0c060);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 2px 8px #00000044;
+}
+.logo-mark span{font-size:15px;font-weight:700;color:#3a2000;font-family:'Montserrat',sans-serif;}
+.topbar-title{font-size:15px;font-weight:700;color:#f0d888;}
+.topbar-sub{font-size:9px;color:#c9e8a0;font-family:'Montserrat',sans-serif;letter-spacing:2px;text-transform:uppercase;margin-top:1px;}
+.topbar-actions{display:flex;gap:8px;margin-right:auto;align-items:center;}
+.topbar-btn{
+  padding:6px 14px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;
+  font-family:'Tajawal',sans-serif;border:none;
+  display:flex;align-items:center;gap:5px;transition:all .15s;
+  box-shadow:0 2px 6px #00000022;
+}
+.topbar-btn:hover{filter:brightness(1.12);transform:translateY(-1px);box-shadow:0 4px 10px #00000033;}
+.tb-front{background:linear-gradient(135deg,#1a5a4e,#22a080);color:#fff;}
+.tb-back{background:linear-gradient(135deg,#8a6010,var(--accent));color:#2a1000;}
+.tb-both{background:linear-gradient(135deg,#4a1a7e,#8a5adf);color:#fff;}
+.tb-print{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:#f0d888;}
+.quality-pill{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);
+  border-radius:20px;padding:4px 10px 4px 8px;
+}
+.quality-pill span{font-size:10px;color:#f0d888;font-family:'Montserrat',sans-serif;}
+.quality-pill input[type=range]{width:60px;height:3px;accent-color:#f0d888;}
+.quality-pill .qv{font-size:10px;color:#f0d888;min-width:18px;font-family:'Montserrat',sans-serif;}
 
-    /* HEADER */
-    .header {
-      background: #0a0a14;
-      border-bottom: 1px solid #1a7a5e55;
-      padding: 10px 22px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-shrink: 0;
-      height: 56px;
-    }
-    .htitle { font-size: 16px; font-weight: 800; color: #c9a84c; }
-    .hsub { font-size: 9px; color: #1a7a5e; font-family: 'Montserrat', sans-serif; letter-spacing: 2px; text-transform: uppercase; }
+.main{display:flex;flex:1;overflow:hidden;}
 
-    /* MAIN */
-    .main { display: flex; flex: 1; overflow: hidden; }
+.sidebar{
+  width:300px;flex-shrink:0;
+  background:var(--ui-sidebar);
+  border-left:1px solid var(--ui-border);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  box-shadow:2px 0 12px #00000010;
+}
+.sidebar-tabs{
+  display:flex;border-bottom:2px solid var(--ui-border);flex-shrink:0;
+  background:#faf8f3;
+}
+.stab{
+  flex:1;padding:11px 4px;text-align:center;font-size:11.5px;
+  font-family:'Tajawal',sans-serif;cursor:pointer;
+  color:var(--ui-muted);border-bottom:3px solid transparent;
+  transition:all .15s;font-weight:700;
+  margin-bottom:-2px;
+}
+.stab.active{color:#5a3a0a;border-bottom-color:#c9a84c;background:#fff;}
+.stab:hover:not(.active){color:var(--ui-text);background:#f0ece4;}
+.tab-panel{display:none;flex:1;overflow-y:auto;padding:14px 14px 28px;scrollbar-width:thin;scrollbar-color:var(--ui-border) transparent;}
+.tab-panel.active{display:block;}
+.tab-panel::-webkit-scrollbar{width:4px;}
+.tab-panel::-webkit-scrollbar-thumb{background:var(--ui-border);border-radius:4px;}
 
-    /* ====== SIDEBAR — INDEPENDENT SCROLL ====== */
-    .sidebar {
-      width: 308px;
-      flex-shrink: 0;
-      background: #0d0d1a;
-      border-left: 1px solid #1a7a5e22;
-      display: flex;
-      flex-direction: column;
-    }
-    .zone-bar {
-      padding: 5px 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-shrink: 0;
-      border-bottom: 1px solid;
-    }
-    .zone-bar svg { width: 11px; height: 11px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
-    .zone-bar span { font-size: 9px; font-family: 'Montserrat', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
-    .sidebar .zone-bar { background: #0a0a16; border-color: #1a7a5e18; }
-    .sidebar .zone-bar svg { stroke: #1a7a5e; }
-    .sidebar .zone-bar span { color: #1a7a5e; }
+.sec{
+  font-size:9px;font-weight:700;color:var(--ui-green);
+  letter-spacing:2px;text-transform:uppercase;
+  font-family:'Montserrat',sans-serif;
+  margin:18px 0 10px;padding-bottom:6px;
+  border-bottom:1.5px solid #c0e8d822;
+  display:flex;align-items:center;gap:5px;
+}
+.sec:first-child{margin-top:0;}
+.sec svg{width:10px;height:10px;fill:none;stroke:var(--ui-green);stroke-width:2;stroke-linecap:round;flex-shrink:0;}
 
-    .sidebar-scroll {
-      flex: 1;
-      overflow-y: auto;
-      overflow-x: hidden;
-      padding: 12px 14px 24px;
-      scrollbar-width: thin;
-      scrollbar-color: #1a7a5e44 transparent;
-    }
-    .sidebar-scroll::-webkit-scrollbar { width: 4px; }
-    .sidebar-scroll::-webkit-scrollbar-thumb { background: #1a7a5e55; border-radius: 4px; }
-    .sidebar-scroll::-webkit-scrollbar-thumb:hover { background: #1a7a5eaa; }
+.fg{margin-bottom:10px;}
+.fg label{display:block;font-size:11.5px;color:var(--ui-label);margin-bottom:4px;font-weight:700;}
+.fg input[type=text],.fg textarea{
+  width:100%;padding:8px 10px;
+  background:#fff;border:1.5px solid var(--ui-border);
+  border-radius:7px;color:#2a1800;font-size:13px;
+  font-family:'Tajawal',sans-serif;transition:border-color .15s,box-shadow .15s;
+  box-shadow:inset 0 1px 3px #00000008;
+}
+.fg input[type=text]:focus,.fg textarea:focus{outline:none;border-color:#c9a84c;box-shadow:0 0 0 3px #c9a84c20;}
+.fg textarea{resize:vertical;min-height:52px;line-height:1.5;}
 
-    /* ====== PREVIEW ZONE — INDEPENDENT SCROLL ====== */
-    .preview-zone {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      background: #e4e4e4;
-      overflow: hidden;
-    }
-    .preview-zone .zone-bar { background: rgba(0,0,0,0.07); border-color: rgba(0,0,0,0.08); }
-    .preview-zone .zone-bar svg { stroke: #666; }
-    .preview-zone .zone-bar span { color: #666; }
+.fs-row{display:flex;align-items:center;gap:6px;margin-top:5px;}
+.fs-row span{font-size:10px;color:var(--ui-muted);white-space:nowrap;min-width:28px;}
+.fs-row input[type=range]{flex:1;height:3px;accent-color:var(--ui-green);}
+.fs-val{font-size:10px;color:var(--ui-green);min-width:26px;font-family:'Montserrat',sans-serif;font-weight:700;}
 
-    .preview {
-      flex: 1;
-      overflow-y: auto;
-      overflow-x: auto;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 28px 20px;
-      gap: 24px;
-      flex-wrap: wrap;
-      scrollbar-width: thin;
-      scrollbar-color: #88888855 transparent;
-    }
-    .preview::-webkit-scrollbar { width: 5px; height: 5px; }
-    .preview::-webkit-scrollbar-thumb { background: #88888866; border-radius: 4px; }
+.panel{
+  background:var(--ui-panel);
+  border:1.5px solid var(--ui-border);
+  border-radius:10px;padding:12px;margin-bottom:10px;
+}
+.panel-title{font-size:9px;color:var(--ui-muted);font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.ci{display:flex;flex-direction:column;gap:3px;}
+.ci label{font-size:9px;color:var(--ui-label);font-family:'Montserrat',sans-serif;font-weight:700;}
+.crow{display:flex;align-items:center;gap:5px;background:#fff;border:1.5px solid var(--ui-border);border-radius:6px;padding:4px 8px;}
+.crow input[type=color]{width:22px;height:22px;border:none;border-radius:4px;padding:0;cursor:pointer;background:none;flex-shrink:0;}
+.crow input[type=color]::-webkit-color-swatch-wrapper{padding:0;}
+.crow input[type=color]::-webkit-color-swatch{border:none;border-radius:3px;}
+.chex{font-size:9px;color:var(--ui-muted);font-family:'Montserrat',sans-serif;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 
-    /* SIDEBAR ELEMENTS */
-    .sec { font-size: 10px; font-weight: 700; color: #1a7a5e; letter-spacing: 2px; text-transform: uppercase; font-family: 'Montserrat', sans-serif; margin: 14px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #1a7a5e22; }
-    .sec:first-child { margin-top: 0; }
-    .fg { margin-bottom: 8px; }
-    .fg label { display: block; font-size: 11px; color: #666; margin-bottom: 3px; }
-    .fg input[type=text], .fg textarea { width: 100%; padding: 6px 10px; background: #12121f; border: 1px solid #252538; border-radius: 6px; color: #ddd; font-size: 13px; font-family: 'Tajawal', sans-serif; }
-    .fg input[type=text]:focus, .fg textarea:focus { outline: none; border-color: #1a7a5e; }
-    .fg textarea { resize: vertical; min-height: 48px; line-height: 1.5; }
-    .fs-row { display: flex; align-items: center; gap: 6px; margin-top: 3px; }
-    .fs-row span { font-size: 10px; color: #555; white-space: nowrap; min-width: 28px; }
-    .fs-row input[type=range] { flex: 1; height: 3px; accent-color: #1a7a5e; }
-    .fs-val { font-size: 10px; color: #1a7a5e; min-width: 26px; text-align: left; }
+.swatches{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;}
+.sw{width:24px;height:24px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:transform .15s,border-color .15s;flex-shrink:0;box-shadow:0 2px 6px #00000022;}
+.sw:hover{transform:scale(1.2);border-color:#c9a84c88;}
+.sw.active{border-color:#5a3a0a !important;box-shadow:0 0 0 2px var(--accent);}
 
-    /* COLOR PANEL */
-    .cpanel { background: #0a0a16; border: 1px solid #1a7a5e1a; border-radius: 9px; padding: 10px; margin-bottom: 8px; }
-    .cpanel-title { font-size: 9px; color: #777; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-    .cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-    .ci { display: flex; flex-direction: column; gap: 3px; }
-    .ci label { font-size: 9px; color: #666; font-family: 'Montserrat', sans-serif; }
-    .crow { display: flex; align-items: center; gap: 5px; background: #12121f; border: 1px solid #252538; border-radius: 5px; padding: 3px 6px; }
-    .crow input[type=color] { width: 20px; height: 20px; border: none; border-radius: 3px; padding: 0; cursor: pointer; background: none; flex-shrink: 0; }
-    .crow input[type=color]::-webkit-color-swatch-wrapper { padding: 0; }
-    .crow input[type=color]::-webkit-color-swatch { border: none; border-radius: 2px; }
-    .chex { font-size: 9px; color: #777; font-family: 'Montserrat', sans-serif; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.upl{
+  width:100%;height:56px;border:2px dashed var(--ui-border);border-radius:9px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  color:var(--ui-muted);font-size:12px;position:relative;overflow:hidden;
+  transition:border-color .15s,color .15s,background .15s;
+  background:#faf8f3;font-weight:700;
+}
+.upl:hover{border-color:#c9a84c;color:#5a3a0a;background:#fff8e8;}
+.upl.uploaded{border-color:var(--ui-green);color:var(--ui-green);background:#f0faf5;border-style:solid;}
+.upl input{position:absolute;opacity:0;width:100%;height:100%;cursor:pointer;z-index:2;}
+.upl .upload-icon{margin-left:6px;font-size:16px;}
 
-    .swatches { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
-    .sw-bg { width: 24px; height: 24px; border-radius: 5px; border: 2px solid transparent; cursor: pointer; transition: transform .15s, border-color .15s; flex-shrink: 0; }
-    .sw-bg:hover { transform: scale(1.2); border-color: #fff4; }
-    .sw-bg.active { border-color: #c9a84c !important; }
-    .sw-ac { width: 24px; height: 24px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform .15s, border-color .15s; flex-shrink: 0; }
-    .sw-ac:hover { transform: scale(1.2); border-color: #fff4; }
-    .sw-ac.active { border-color: #fff; }
+.size-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
+.size-field label{display:block;font-size:10px;color:var(--ui-label);margin-bottom:4px;text-align:center;font-weight:700;}
+.size-field input[type=number]{
+  width:100%;padding:7px 8px;background:#fff;border:1.5px solid var(--ui-border);
+  border-radius:7px;color:#2a1800;font-size:15px;font-weight:700;text-align:center;
+  font-family:'Montserrat',sans-serif;
+}
+.size-field input[type=number]:focus{outline:none;border-color:var(--accent);}
+.size-unit{font-size:10px;color:var(--ui-muted);text-align:center;margin-top:2px;}
+.preset-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:8px;}
+.preset-btn{
+  padding:7px 4px;background:#fff;border:1.5px solid var(--ui-border);border-radius:7px;
+  color:var(--ui-muted);font-size:10px;cursor:pointer;font-family:'Montserrat',sans-serif;text-align:center;
+  transition:all .15s;line-height:1.5;font-weight:600;
+}
+.preset-btn:hover{border-color:#c9a84c;color:#5a3a0a;background:#fff8e8;}
+.apply-btn{
+  width:100%;padding:9px;margin-top:10px;
+  background:linear-gradient(135deg,#1a5a4e,#0f3a30);
+  border:none;border-radius:8px;
+  color:#fff;font-size:13px;font-weight:700;cursor:pointer;
+  font-family:'Tajawal',sans-serif;transition:all .15s;
+  box-shadow:0 2px 8px #1a7a5e33;
+}
+.apply-btn:hover{background:linear-gradient(135deg,var(--ui-green),#0f5040);transform:translateY(-1px);}
 
-    .btn-reset { width: 100%; padding: 5px; background: #12121f; border: 1px solid #252538; border-radius: 5px; color: #888; font-size: 11px; cursor: pointer; font-family: 'Tajawal', sans-serif; margin-top: 6px; }
-    .btn-reset:hover { border-color: #c9a84c; color: #c9a84c; }
+.photo-ctrl{margin-top:10px;display:none;}
+.ctrl-label{font-size:11px;color:var(--ui-label);display:block;margin-bottom:6px;}
+.ctrl-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.ctrl-row span{font-size:11px;color:var(--ui-label);min-width:60px;font-weight:700;}
+.ctrl-row input[type=range]{flex:1;height:4px;accent-color:#c9a84c;}
+.ctrl-val{font-size:11px;color:#7a5010;min-width:36px;font-family:'Montserrat',sans-serif;font-weight:700;}
+.reset-btn{
+  width:100%;padding:7px;background:#fff;border:1.5px solid var(--ui-border);
+  border-radius:7px;color:var(--ui-muted);font-size:12px;cursor:pointer;font-family:'Tajawal',sans-serif;
+  transition:all .15s;margin-top:4px;font-weight:700;
+}
+.reset-btn:hover{border-color:var(--ui-green);color:var(--ui-green);background:#f0faf5;}
 
-    /* SIZE */
-    .size-box { background: #0a0a16; border: 1px solid #1a7a5e33; border-radius: 10px; padding: 12px; margin-bottom: 6px; }
-    .size-title { font-size: 11px; color: #888; margin-bottom: 8px; text-align: center; font-family: 'Montserrat', sans-serif; }
-    .size-current { text-align: center; font-size: 12px; color: #c9a84c; font-family: 'Montserrat', sans-serif; margin-bottom: 10px; font-weight: 600; }
-    .size-inputs { display: flex; gap: 8px; margin-bottom: 8px; }
-    .size-field { flex: 1; }
-    .size-field label { display: block; font-size: 10px; color: #666; margin-bottom: 3px; text-align: center; }
-    .size-field input[type=number] { width: 100%; padding: 6px 8px; background: #12121f; border: 1px solid #252538; border-radius: 6px; color: #fff; font-size: 14px; font-weight: 700; text-align: center; font-family: 'Montserrat', sans-serif; }
-    .size-field input[type=number]:focus { outline: none; border-color: #c9a84c; }
-    .size-unit { font-size: 10px; color: #555; text-align: center; margin-top: 2px; }
-    .size-presets { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
-    .preset-btn { flex: 1; min-width: calc(50% - 3px); padding: 5px 4px; background: #12121f; border: 1px solid #252538; border-radius: 5px; color: #888; font-size: 10px; cursor: pointer; font-family: 'Montserrat', sans-serif; text-align: center; }
-    .preset-btn:hover { border-color: #1a7a5e; color: #1a7a5e; }
-    .apply-size { width: 100%; padding: 7px; background: linear-gradient(135deg,#1a5a4e,#0f3a30); border: 1px solid #1a7a5e44; border-radius: 6px; color: #1a7a5e; font-size: 12px; font-weight: 700; cursor: pointer; font-family: 'Tajawal', sans-serif; margin-top: 6px; }
-    .apply-size:hover { background: linear-gradient(135deg,#1a7a5e,#0f5040); color: #fff; }
+.mode-row{display:flex;gap:6px;margin:8px 0;}
+.mode-btn{
+  flex:1;padding:7px 4px;background:#fff;border:1.5px solid var(--ui-border);
+  border-radius:7px;color:var(--ui-muted);font-size:11px;cursor:pointer;
+  font-family:'Tajawal',sans-serif;text-align:center;transition:all .2s;font-weight:700;
+}
+.mode-btn.active{border-color:#c9a84c;color:#5a3a0a;background:#fff8e8;}
 
-    /* UPLOAD */
-    .upl { width: 100%; height: 54px; border: 1.5px dashed #252538; border-radius: 7px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #555; font-size: 12px; position: relative; overflow: hidden; }
-    .upl:hover { border-color: #1a7a5e; color: #1a7a5e; }
-    .upl input { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
-    .photo-ctrl { margin-top: 8px; display: none; }
-    .ctrl-lbl { font-size: 11px; color: #666; display: block; margin-bottom: 4px; }
-    .ctrl-row { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
-    .ctrl-row span { font-size: 10px; color: #555; min-width: 50px; }
-    .ctrl-row input[type=range] { flex: 1; height: 3px; accent-color: #c9a84c; }
-    .ctrl-val { font-size: 10px; color: #c9a84c; min-width: 32px; text-align: left; }
-    .reset-photo { width: 100%; padding: 5px; background: #1a1a2e; border: 1px solid #252538; border-radius: 5px; color: #888; font-size: 11px; cursor: pointer; font-family: 'Tajawal', sans-serif; }
-    .reset-photo:hover { border-color: #1a7a5e; color: #1a7a5e; }
+.lock-strip{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 12px;background:var(--ui-panel);border-radius:8px;margin-bottom:10px;
+  border:1.5px solid var(--ui-border);
+}
+.lock-strip span{font-size:12px;color:var(--ui-label);font-weight:700;}
+.lock-btn{
+  padding:5px 14px;border-radius:6px;font-size:11px;cursor:pointer;
+  border:1.5px solid #1a7a5e;background:#f0faf5;color:#1a7a5e;
+  font-family:'Montserrat',sans-serif;transition:all .15s;font-weight:700;
+}
+.lock-btn.locked{border-color:#c0392b;color:#c0392b;background:#fff5f5;}
 
-    /* QR */
-    .qr-box { background: #0a0a16; border: 1px solid #c9a84c33; border-radius: 8px; padding: 10px; margin-top: 6px; }
-    .qr-box .ql { font-size: 11px; color: #c9a84c; display: block; margin-bottom: 5px; }
-    .qr-size-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
-    .qr-size-row span { font-size: 10px; color: #666; min-width: 40px; }
-    .qr-size-row input[type=range] { flex: 1; height: 3px; accent-color: #c9a84c; }
-    .qr-size-val { font-size: 10px; color: #c9a84c; min-width: 30px; text-align: left; }
+.qr-box{
+  background:var(--ui-panel);border:1.5px solid var(--ui-border-accent);
+  border-radius:9px;padding:12px;margin-top:8px;
+}
+.qr-box .ql{font-size:12px;color:#5a3a0a;display:block;margin-bottom:8px;font-weight:700;}
+.sz-row{display:flex;align-items:center;gap:8px;margin-top:6px;}
+.sz-row span{font-size:11px;color:var(--ui-muted);min-width:40px;font-weight:700;}
+.sz-row input[type=range]{flex:1;height:4px;accent-color:#c9a84c;}
+.sz-val{font-size:11px;color:#7a5010;min-width:34px;font-family:'Montserrat',sans-serif;font-weight:700;}
 
-    /* LOCK */
-    .lock-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-    .lock-row span { font-size: 11px; color: #888; }
-    .lock-btn { padding: 4px 12px; border: 1px solid #1a7a5e; border-radius: 5px; background: #0a0a16; color: #1a7a5e; font-size: 11px; cursor: pointer; font-family: 'Montserrat', sans-serif; }
-    .lock-btn.locked { border-color: #c0392b; color: #c0392b; }
+.preview-zone{
+  flex:1;display:flex;flex-direction:column;
+  background:#e8e4da;overflow:hidden;
+}
+.preview-header{
+  background:#f0ece2;border-bottom:1.5px solid var(--ui-border);
+  padding:8px 18px;display:flex;align-items:center;gap:8px;flex-shrink:0;
+}
+.preview-header span{font-size:9px;color:var(--ui-muted);font-family:'Montserrat',sans-serif;letter-spacing:1px;text-transform:uppercase;font-weight:700;}
+.preview-dot{width:8px;height:8px;border-radius:50%;background:#1a7a5e;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
+.preview{
+  flex:1;overflow:auto;
+  display:flex;align-items:flex-start;justify-content:center;
+  padding:32px 24px;gap:32px;flex-wrap:wrap;
+  scrollbar-width:thin;scrollbar-color:#c0b89888 transparent;
+  background:
+    radial-gradient(ellipse at 20% 50%, #d8c88815 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, #b89a5515 0%, transparent 60%),
+    #e0dbd0;
+}
+.preview::-webkit-scrollbar{width:5px;height:5px;}
+.preview::-webkit-scrollbar-thumb{background:#c0b89866;border-radius:3px;}
+.card-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.card-badge{
+  font-size:9px;color:#7a6040;font-family:'Montserrat',sans-serif;
+  letter-spacing:2px;text-transform:uppercase;
+  background:#fff;padding:4px 12px;border-radius:20px;
+  border:1px solid #d0c8b0;font-weight:700;
+  box-shadow:0 1px 4px #00000010;
+}
 
-    /* SAVE */
-    .save-area { background: #0a0a16; border: 1px solid #3a3a5e33; border-radius: 10px; padding: 12px; margin-top: 14px; }
-    .sa-title { font-size: 10px; color: #666; font-family: 'Montserrat', sans-serif; text-align: center; margin-bottom: 8px; letter-spacing: 1px; text-transform: uppercase; }
-    .btns { display: flex; gap: 6px; margin-bottom: 6px; }
-    .btn { flex: 1; padding: 8px 4px; border: none; border-radius: 7px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: 'Tajawal', sans-serif; }
-    .b1 { background: linear-gradient(135deg,#1a7a5e,#0f5040); color: #fff; }
-    .b2 { background: linear-gradient(135deg,#8a5c10,#c9a84c); color: #111; }
-    .b3 { background: linear-gradient(135deg,#3a1a5e,#7a4abf); color: #fff; }
-    .save-scale-row { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
-    .save-scale-row span { font-size: 10px; color: #666; min-width: 60px; }
-    .save-scale-row input[type=range] { flex: 1; height: 3px; accent-color: #7a4abf; }
-    .save-scale-val { font-size: 10px; color: #7a4abf; min-width: 26px; text-align: left; }
-    .print-btn { width: 100%; padding: 8px; background: linear-gradient(135deg,#3a3a1a,#6a6a10); border: none; border-radius: 7px; color: #c9a84c; font-size: 12px; font-weight: 700; cursor: pointer; font-family: 'Tajawal', sans-serif; margin-top: 6px; }
+.card{
+  background:var(--card-bg);border-radius:16px;overflow:hidden;
+  box-shadow:0 20px 60px #00000055,0 0 0 1px #c9a84c44;
+  display:flex;flex-direction:column;
+}
+.strip{
+  background:linear-gradient(90deg,var(--strip1),var(--strip2),var(--strip1));
+  margin:0 auto;border-radius:0 0 11px 11px;flex-shrink:0;
+}
+.cbody{
+  flex:1;padding:8px 16px 14px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:space-evenly;overflow:hidden;
+}
+.clogo{object-fit:contain;display:block;}
 
-    /* PREVIEW LABELS */
-    .plabel { width: 100%; text-align: center; font-size: 10px; color: #aaa; letter-spacing: 2px; font-family: 'Montserrat', sans-serif; text-transform: uppercase; margin-bottom: -4px; }
-    .card-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .card-lbl { font-size: 10px; color: #888; font-family: 'Montserrat', sans-serif; letter-spacing: 1px; }
+.logo-placeholder{
+  display:flex;align-items:center;justify-content:center;
+  border:2px dashed var(--strip2);border-radius:8px;
+  color:var(--strip1);font-size:9px;font-family:'Montserrat',sans-serif;
+  font-weight:700;letter-spacing:1px;text-align:center;
+  background:linear-gradient(135deg,#fff8e8,#fff3d0);
+  line-height:1.4;
+}
 
-    /* CARD */
-    .card { background: var(--card-bg); border-radius: 16px; overflow: hidden; box-shadow: 0 16px 50px rgba(0,0,0,0.5), 0 0 0 1px var(--card-shadow-color); display: flex; flex-direction: column; }
-    .strip { background: linear-gradient(90deg, var(--strip-color1), var(--strip-color2), var(--strip-color1)); margin: 0 auto; border-radius: 0 0 11px 11px; flex-shrink: 0; }
-    .cbody { flex: 1; padding: 8px 18px 14px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; overflow: hidden; }
-    .clogo { object-fit: contain; display: block; }
-    .hnar { font-weight: 800; color: var(--txt-hotel-ar); direction: rtl; line-height: 1.3; }
-    .hnen { color: var(--txt-hotel-en); letter-spacing: 2px; font-family: 'Montserrat', sans-serif; font-weight: 600; }
-    .pframe { border: 3px solid var(--photo-border); border-radius: 10px; overflow: hidden; background: #141414; display: flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0; }
-    .pframe img { position: absolute; transform-origin: center center; user-select: none; pointer-events: none; width: 100%; height: 100%; object-fit: cover; }
-    .pph { color: #333; font-size: 10px; text-align: center; line-height: 1.7; }
-    .enar { font-weight: 800; color: var(--txt-name-ar); direction: rtl; }
-    .enen { color: var(--txt-name-en); font-family: 'Montserrat', sans-serif; font-weight: 600; }
-    .divl { height: 1px; width: 100%; background: linear-gradient(90deg, transparent, var(--divider-color), transparent); }
-    .dar { font-weight: 700; color: var(--txt-dept-ar); direction: rtl; }
-    .den { color: var(--txt-dept-en); font-family: 'Montserrat', sans-serif; font-weight: 600; }
-    .tar { font-weight: 700; color: var(--txt-title-ar); direction: rtl; }
-    .ten { color: var(--txt-title-en); font-family: 'Montserrat', sans-serif; font-weight: 600; }
-    .emp-id-badge { margin-top: 4px; background: #000000; border: 1px solid #1a7a5e55; border-radius: 6px; padding: 3px 10px; display: inline-block; }
-    .emp-id-text { font-family: 'Montserrat', sans-serif; font-size: 11px; color: var(--txt-emp-id); letter-spacing: 2px; font-weight: 700; }
-    /* BACK */
-    .bbody { flex: 1; padding: 10px 14px 12px; text-align: center; display: flex; flex-direction: column; align-items: center; overflow: hidden; position: relative; direction: ltr; }
-    .blogo { object-fit: contain; display: block; margin-bottom: 6px; }
-    .btit { font-weight: 700; color: var(--back-title); letter-spacing: 2px; font-family: 'Montserrat', sans-serif; margin-bottom: 6px; }
-    .tblock { margin-bottom: 6px; width: 100%; }
-    .tb { font-weight: 700; color: var(--back-tb); font-family: 'Montserrat', sans-serif; display: block; margin-bottom: 2px; }
-    .tp { color: var(--back-tp); line-height: 1.6; font-family: 'Montserrat', sans-serif; }
-    /* Draggable */
-    .back-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
-    .back-overlay.editable { pointer-events: all; }
-    .draggable-item { position: absolute; cursor: default; user-select: none; }
-    .draggable-item.editable { cursor: move; }
-    .draggable-item.editable .drag-handle { display: flex; }
-    .drag-handle { display: none; position: absolute; top: -16px; left: 0; right: 0; justify-content: center; }
-    .drag-handle span { background: var(--drag-handle-bg); color: #fff; font-size: 8px; padding: 1px 6px; border-radius: 3px; font-family: 'Montserrat', sans-serif; }
-    .back-img-frame { width: 60px; height: 60px; border: 2px solid var(--back-logo-border); border-radius: 4px; overflow: hidden; background: #141414; display: flex; align-items: center; justify-content: center; }
-    .back-img-frame img { width: 100%; height: 100%; object-fit: cover; }
-    .back-img-ph { color: #333; font-size: 7px; text-align: center; line-height: 1.5; }
-    .qr-frame { background: #fff; border: 2px solid var(--qr-border); border-radius: 4px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-    .qr-frame img { width: 100%; height: 100%; object-fit: contain; display: block; }
-    .qr-ph { color: #999; font-size: 7px; text-align: center; padding: 3px; }
+.hnar{font-weight:800;color:var(--hotel-ar);direction:rtl;line-height:1.3;}
+.hnen{color:var(--hotel-en);letter-spacing:2px;font-family:'Montserrat',sans-serif;font-weight:600;}
+.pframe{
+  border:3px solid var(--photo-border);border-radius:10px;
+  overflow:hidden;background:#f0ece4;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;flex-shrink:0;
+}
+.pframe canvas.photo-canvas{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:7px;}
+.pph{color:#8a7a5a;font-size:10px;text-align:center;line-height:1.7;}
+.enar{font-weight:800;color:var(--name-ar);direction:rtl;}
+.enen{color:var(--name-en);font-family:'Montserrat',sans-serif;font-weight:600;}
+.divl{height:1px;width:80%;background:linear-gradient(90deg,transparent,var(--divider),transparent);margin:2px 0;}
+.dar{font-weight:700;color:var(--dept-ar);direction:rtl;}
+.den{color:var(--dept-en);font-family:'Montserrat',sans-serif;font-weight:600;}
+.tar{font-weight:700;color:var(--title-ar);direction:rtl;}
+.ten{color:var(--title-en);font-family:'Montserrat',sans-serif;font-weight:600;}
+.emp-id-badge{
+  margin-top:4px;background:#2a1800;
+  border:1px solid #c9a84c55;border-radius:6px;
+  padding:3px 12px;display:inline-block;
+}
+.emp-id-text{font-family:'Montserrat',sans-serif;font-size:11px;color:var(--emp-id);letter-spacing:2px;font-weight:700;}
 
-    @media print {
-      @page { size: A4; margin: 8mm; }
-      body { background: #fff !important; overflow: visible !important; height: auto !important; }
-      .header, .sidebar, .plabel, .card-lbl, .zone-bar { display: none !important; }
-      .main { overflow: visible !important; display: block !important; }
-      .preview-zone { background: #fff !important; overflow: visible !important; height: auto !important; }
-      .preview { overflow: visible !important; height: auto !important; background: #fff !important; padding: 0 !important; display: flex !important; flex-direction: row !important; justify-content: center !important; align-items: flex-start !important; gap: 10mm !important; flex-wrap: nowrap !important; }
-      .card { box-shadow: none !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; border-radius: 4mm !important; }
-      .drag-handle { display: none !important; }
-    }
-  </style>
+.bbody{
+  flex:1;padding:10px 14px 12px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;
+  overflow:hidden;position:relative;direction:ltr;
+}
+.blogo{object-fit:contain;display:block;margin-bottom:6px;}
+.btit{font-weight:700;color:var(--back-title);letter-spacing:2px;font-family:'Montserrat',sans-serif;margin-bottom:6px;}
+.tblock{margin-bottom:6px;width:100%;}
+.tb{font-weight:700;color:var(--back-tb);font-family:'Montserrat',sans-serif;display:block;margin-bottom:2px;}
+.tp{color:var(--back-tp);line-height:1.6;font-family:'Montserrat',sans-serif;}
+.back-overlay{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;}
+.back-overlay.editable{pointer-events:all;}
+.draggable-item{position:absolute;cursor:default;user-select:none;}
+.draggable-item.editable{cursor:move;}
+.draggable-item.editable .drag-handle{display:flex;}
+.drag-handle{display:none;position:absolute;top:-16px;left:0;right:0;justify-content:center;}
+.drag-handle span{background:var(--drag-handle);color:#fff;font-size:8px;padding:1px 6px;border-radius:3px;font-family:'Montserrat',sans-serif;}
+
+/* ── BACK IMAGE FRAME — fixed contain, no distortion ── */
+.back-img-frame{
+  border:2px solid #c9a84c66;
+  border-radius:6px;
+  overflow:hidden;
+  background:#f5f0e0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+/* The actual image inside the frame: contain so it never distorts */
+.back-img-frame img.back-img-real{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  display:block;
+}
+.back-img-ph{color:#8a7a50;font-size:7px;text-align:center;line-height:1.5;}
+
+.qr-frame{background:#fff;border:none ;border-radius:4px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.qr-frame img{width:100%;height:100%;object-fit:contain;display:block;}
+.qr-ph{color:#aaa;font-size:7px;text-align:center;padding:3px;}
+
+.status-bar{
+  background:#faf7f0;border-bottom:1.5px solid var(--ui-border);
+  padding:6px 18px;display:flex;align-items:center;gap:14px;flex-shrink:0;
+}
+.status-item{display:flex;align-items:center;gap:4px;}
+.status-item span{font-size:10px;color:var(--ui-muted);font-family:'Montserrat',sans-serif;}
+.status-item strong{font-size:10px;color:#7a5010;font-family:'Montserrat',sans-serif;font-weight:700;}
+.status-dot{width:6px;height:6px;border-radius:50%;background:#1a7a5e;}
+
+.photo-thumb{
+  width:100%;height:80px;border-radius:8px;overflow:hidden;
+  border:2px solid #c9a84c;margin-top:6px;display:none;
+  background:#f5f0e0;position:relative;
+}
+.photo-thumb img{width:100%;height:100%;object-fit:cover;}
+.photo-thumb .thumb-overlay{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(transparent,#00000088);
+  color:#fff;font-size:9px;padding:4px 6px;
+  font-family:'Montserrat',sans-serif;font-weight:700;text-align:center;
+}
+
+@media print{
+  @page{size:A4;margin:8mm}
+  body{background:#fff !important;overflow:visible !important;height:auto !important}
+  .topbar,.sidebar,.card-badge,.preview-header,.status-bar{display:none !important}
+  .main{overflow:visible !important;display:block !important}
+  .preview-zone{background:#fff !important;overflow:visible !important;height:auto !important}
+  .preview{overflow:visible !important;height:auto !important;background:#fff !important;padding:0 !important;display:flex !important;flex-direction:row !important;justify-content:center !important;align-items:flex-start !important;gap:10mm !important;flex-wrap:nowrap !important}
+  .card{box-shadow:none !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:4mm !important}
+  .drag-handle{display:none !important}
+}
+</style>
 </head>
 <body>
 
-<div class="header">
-  <div>
-    <div class="htitle">فندق الأنبار الدولي — مولّد بطاقات الموظفين</div>
-    <div class="hsub">AL-ANBAR INTERNATIONAL HOTEL · ID CARD GENERATOR</div>
+<!-- TOPBAR -->
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div class="logo-mark"><span>A</span></div>
+    <div>
+      <div class="topbar-title">فندق الأنبار الدولي</div>
+      <div class="topbar-sub">ID Card Generator</div>
+    </div>
+  </div>
+  <div class="topbar-actions">
+    <div class="quality-pill">
+      <span>جودة</span>
+      <input type="range" min="1" max="5" value="5" id="saveScale" oninput="document.getElementById('saveScaleVal').textContent=this.value+'x'">
+      <span class="qv" id="saveScaleVal">5x</span>
+    </div>
+    <button class="topbar-btn tb-front" onclick="saveFront()">⬇ الواجهة</button>
+    <button class="topbar-btn tb-back" onclick="saveBack()">⬇ الظهر</button>
+    <button class="topbar-btn tb-both" onclick="saveBoth()">⬇ الاثنان</button>
+    <button class="topbar-btn tb-print" onclick="window.print()">🖨 طباعة</button>
   </div>
 </div>
 
 <div class="main">
 
-  <!-- ===== SIDEBAR ===== -->
-  <div class="sidebar">
-    <div class="zone-bar">
-      <svg viewBox="0 0 12 14"><path d="M6 1v12M2 4l4-4 4 4M2 10l4 4 4-4"/></svg>
-      <span>منطقة الأدوات — مرر الماوس هنا للتحكم فقط</span>
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sidebar-tabs">
+    <div class="stab active" onclick="switchTab('info')">المعلومات</div>
+    <div class="stab" onclick="switchTab('photo')">الصورة</div>
+    <div class="stab" onclick="switchTab('design')">التصميم</div>
+    <div class="stab" onclick="switchTab('back')">الظهر</div>
+  </div>
+
+  <!-- TAB: INFO -->
+  <div class="tab-panel active" id="tab-info">
+    <div class="sec">
+      <svg viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" rx="2"/><line x1="4" y1="5" x2="8" y2="5"/><line x1="4" y1="7.5" x2="8" y2="7.5"/></svg>
+      معلومات الفندق
     </div>
-    <div class="sidebar-scroll">
-
-      <!-- SIZE -->
-      <div class="sec">حجم البطاقة</div>
-      <div class="size-box">
-        <div class="size-title">CARD DIMENSIONS</div>
-        <div class="size-current" id="sizeDisplay">290 × 460 px</div>
-        <div class="size-inputs">
-          <div class="size-field"><label>العرض</label><input type="number" id="cardW" value="290" min="150" max="600"><div class="size-unit">px</div></div>
-          <div class="size-field"><label>الارتفاع</label><input type="number" id="cardH" value="460" min="200" max="900"><div class="size-unit">px</div></div>
-        </div>
-        <div class="size-presets">
-          <button class="preset-btn" onclick="setPreset(290,460)">افتراضي<br>290×460</button>
-          <button class="preset-btn" onclick="setPreset(250,395)">صغير<br>250×395</button>
-          <button class="preset-btn" onclick="setPreset(340,539)">متوسط<br>340×539</button>
-          <button class="preset-btn" onclick="setPreset(400,634)">كبير<br>400×634</button>
-        </div>
-        <button class="apply-size" onclick="applySize()">✓ تطبيق الحجم</button>
+    <div class="fg"><label>اسم الفندق — عربي</label><input type="text" id="hotelAr" value="فنـدق الانبـار الـدولي" oninput="upd()"></div>
+    <div class="fg">
+      <label>Hotel Name — English</label>
+      <input type="text" id="hotelEn" value="ANBAR INTERNATIONAL HOTEL" oninput="upd()">
+      <div class="fs-row"><span>حجم</span><input type="range" min="6" max="18" value="14" oninput="setFs('hnen',this.value)"><span class="fs-val" id="hnen-v">14px</span></div>
+    </div>
+    <div class="sec">
+      <svg viewBox="0 0 12 12"><circle cx="6" cy="4" r="2.5"/><path d="M1.5 10c0-2.5 2-4 4.5-4s4.5 1.5 4.5 4"/></svg>
+      معلومات الموظف
+    </div>
+    <div class="fg">
+      <label>الاسم — عربي</label>
+      <input type="text" id="nameAr" value="حارث موفق جاسم" oninput="upd()">
+      <div class="fs-row"><span>حجم</span><input type="range" min="10" max="28" value="18" oninput="setFs('enar',this.value)"><span class="fs-val" id="enar-v">18px</span></div>
+    </div>
+    <div class="fg">
+      <label>Name — English</label>
+      <input type="text" id="nameEn" value="Harith M. Muafaq" oninput="upd()">
+      <div class="fs-row"><span>حجم</span><input type="range" min="8" max="22" value="16" oninput="setFs('enen',this.value)"><span class="fs-val" id="enen-v">16px</span></div>
+    </div>
+    <div class="fg">
+      <label>القسم — عربي</label>
+      <input type="text" id="deptAr" value="تكنولوجيا المعلومات" oninput="upd()">
+      <div class="fs-row"><span>حجم</span><input type="range" min="8" max="24" value="16" oninput="setFs('dar',this.value)"><span class="fs-val" id="dar-v">16px</span></div>
+    </div>
+    <div class="fg">
+      <label>Department — English</label>
+      <input type="text" id="deptEn" value="I.T. Department" oninput="upd()">
+      <div class="fs-row"><span>حجم</span><input type="range" min="6" max="18" value="14" oninput="setFs('den',this.value)"><span class="fs-val" id="den-v">14px</span></div>
+    </div>
+    <div class="fg">
+      <label>المسمى الوظيفي — عربي</label>
+      <input type="text" id="titleAr" value="مهندس" oninput="upd()">
+      <div class="fs-row"><span>حجم</span><input type="range" min="8" max="24" value="16" oninput="setFs('tar',this.value)"><span class="fs-val" id="tar-v">16px</span></div>
+    </div>
+    <div class="fg">
+      <label>Job Title — English</label>
+      <input type="text" id="titleEn" value="A.V. Engineer" oninput="upd()">
+      <div class="fs-row"><span>حجم</span><input type="range" min="6" max="18" value="14" oninput="setFs('ten',this.value)"><span class="fs-val" id="ten-v">14px</span></div>
+    </div>
+    <div class="fg">
+      <label>رقم الموظف (4 أرقام)</label>
+      <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--ui-border);border-radius:8px;padding:6px 10px;">
+        <span style="font-size:11px;color:#5a3a0a;font-family:'Montserrat',sans-serif;font-weight:700;white-space:nowrap;">AIH No.</span>
+        <input type="text" id="empNum" value="0159" maxlength="4" placeholder="0000"
+          style="flex:1;min-width:0;border:none;background:transparent;text-align:center;font-family:'Montserrat',sans-serif;font-weight:700;font-size:20px;letter-spacing:4px;color:#7a5010;padding:0;"
+          oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4);upd()">
       </div>
+    </div>
 
-      <!-- ===== CARD COLORS ===== -->
-      <div class="sec">🎨 ألوان البطاقة</div>
+    <div class="sec">
+      <svg viewBox="0 0 12 12"><rect x="1" y="2" width="10" height="8" rx="1.5"/><line x1="4" y1="5" x2="8" y2="5"/><line x1="4" y1="7" x2="7" y2="7"/></svg>
+      نص الشروط (الظهر)
+    </div>
+    <div class="fg">
+      <label>Identification</label>
+      <textarea id="t1" oninput="upd()">Carry the ID card at all times during working hours for identification purposes.</textarea>
+      <div class="fs-row"><span>حجم</span><input type="range" min="6" max="16" value="15" oninput="setFs('tp1',this.value)"><span class="fs-val" id="tp1-v">15px</span></div>
+    </div>
+    <div class="fg">
+      <label>Authorized Use</label>
+      <textarea id="t2" oninput="upd()">The ID card is strictly for official use and should not be shared or used for unauthorized purposes.</textarea>
+      <div class="fs-row"><span>حجم</span><input type="range" min="6" max="16" value="15" oninput="setFs('tp2',this.value)"><span class="fs-val" id="tp2-v">15px</span></div>
+    </div>
+  </div>
 
-      <div class="cpanel">
-        <div class="cpanel-title">خلفية البطاقة</div>
+  <!-- TAB: PHOTO -->
+  <div class="tab-panel" id="tab-photo">
+    <div class="sec">
+      <svg viewBox="0 0 12 12"><rect x="1" y="2.5" width="10" height="7.5" rx="1.5"/><circle cx="6" cy="6.5" r="2"/><path d="M4 2.5L4.5 1h3l.5 1.5"/></svg>
+      صورة الموظف
+    </div>
+
+    <div class="upl" id="photoUpl" onclick="document.getElementById('photoFileInput').click()">
+      <input type="file" id="photoFileInput" accept="image/*" onchange="loadPhoto(event)" style="display:none;">
+      <span class="upload-icon">📷</span>
+      <span id="uplbl">اضغط لرفع صورة الموظف</span>
+    </div>
+
+    <div class="photo-thumb" id="photoThumb">
+      <img id="photoThumbImg" src="" alt="">
+      <div class="thumb-overlay">✓ الصورة محملة — اضغط للتغيير</div>
+    </div>
+    <div id="reuploadWrap" style="display:none;margin-top:6px;">
+      <div class="upl" style="height:40px;font-size:11px;" onclick="document.getElementById('photoFileInput').click()">
+        <span class="upload-icon" style="font-size:13px;">🔄</span>
+        <span>تغيير الصورة</span>
+      </div>
+    </div>
+
+    <div style="margin-top:10px;">
+      <div class="fg" style="margin-bottom:4px;"><label>طريقة عرض الصورة</label></div>
+      <div class="mode-row">
+        <button class="mode-btn active" id="modeContain" onclick="setPhotoMode('contain')">كاملة بدون قطع</button>
+        <button class="mode-btn" id="modeCover" onclick="setPhotoMode('cover')">ملء الإطار</button>
+      </div>
+    </div>
+
+    <div class="photo-ctrl" id="photoCtrl">
+      <div class="sec" style="margin-top:14px;">
+        <svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg>
+        التحكم بالصورة
+      </div>
+      <div class="ctrl-row"><span>تكبير</span><input type="range" min="50" max="300" value="100" id="imgScale" oninput="updatePhotoCanvas()"><span class="ctrl-val" id="scaleVal">100%</span></div>
+      <div class="ctrl-row"><span>يمين/يسار</span><input type="range" min="-200" max="200" value="0" id="imgX" oninput="updatePhotoCanvas()"><span class="ctrl-val" id="xVal">0</span></div>
+      <div class="ctrl-row"><span>أعلى/أسفل</span><input type="range" min="-200" max="200" value="0" id="imgY" oninput="updatePhotoCanvas()"><span class="ctrl-val" id="yVal">0</span></div>
+      <button class="reset-btn" onclick="resetPhoto()">↺ إعادة ضبط الصورة</button>
+    </div>
+
+    <div class="sec" style="margin-top:16px;">
+      <svg viewBox="0 0 12 12"><rect x="1" y="3" width="10" height="7" rx="1"/><path d="M4 3V2a2 2 0 014 0v1"/></svg>
+      حجم البطاقة
+    </div>
+    <div class="panel">
+      <div style="text-align:center;font-size:12px;color:#7a5010;font-family:'Montserrat',sans-serif;font-weight:700;margin-bottom:10px;background:#fff8e8;padding:6px;border-radius:6px;border:1px solid #c9a84c44;" id="sizeDisplay">290 × 460 px</div>
+      <div class="size-grid">
+        <div class="size-field"><label>العرض</label><input type="number" id="cardW" value="290" min="150" max="600"><div class="size-unit">px</div></div>
+        <div class="size-field"><label>الارتفاع</label><input type="number" id="cardH" value="460" min="200" max="900"><div class="size-unit">px</div></div>
+      </div>
+      <div class="preset-grid">
+        <button class="preset-btn" onclick="setPreset(290,460)">افتراضي<br>290×460</button>
+        <button class="preset-btn" onclick="setPreset(250,395)">صغير<br>250×395</button>
+        <button class="preset-btn" onclick="setPreset(340,539)">متوسط<br>340×539</button>
+        <button class="preset-btn" onclick="setPreset(400,634)">كبير<br>400×634</button>
+      </div>
+      <button class="apply-btn" onclick="applySize()">✓ تطبيق الحجم</button>
+    </div>
+  </div>
+
+  <!-- TAB: DESIGN -->
+  <div class="tab-panel" id="tab-design">
+    <div class="sec">خلفية البطاقة</div>
+    <div class="panel">
+      <div class="ci">
+        <label>لون الخلفية</label>
+        <div class="crow">
+          <input type="color" id="cl_bg" value="#e6e6e6" oninput="cv('--card-bg',this.value);hx('hx_bg',this.value)">
+          <span class="chex" id="hx_bg">#e6e6e6</span>
+        </div>
+      </div>
+      <div class="swatches" style="margin-top:8px;">
+        <div class="sw" style="background:#f5f0e8;border:1px solid #ccc;" onclick="setBg('#f5f0e8',this)"></div>
+        <div class="sw" style="background:#e8e6e0;" onclick="setBg('#e8e6e0',this)"></div>
+        <div class="sw" style="background:#0a0a0a;" onclick="setBg('#0a0a0a',this)"></div>
+        <div class="sw" style="background:#0a0a2a;" onclick="setBg('#0a0a2a',this)"></div>
+        <div class="sw" style="background:#1a0000;" onclick="setBg('#1a0000',this)"></div>
+        <div class="sw" style="background:#001a0a;" onclick="setBg('#001a0a',this)"></div>
+        <div class="sw" style="background:#1a1200;" onclick="setBg('#1a1200',this)"></div>
+        <div class="sw active" style="background:#ffffff;border:1px solid #ccc;" onclick="setBg('#ffffff',this)"></div>
+      </div>
+    </div>
+
+    <div class="sec">شريط اللون</div>
+    <div class="panel">
+      <div class="cgrid">
         <div class="ci">
-          <label>لون الخلفية</label>
-          <div class="crow">
-            <input type="color" id="cl_bg" value="#e6e6e6" oninput="cv('--card-bg',this.value);hx('hx_bg',this.value)">
-            <span class="chex" id="hx_bg">#e6e6e6</span>
-          </div>
+          <label>بداية الشريط</label>
+          <div class="crow"><input type="color" id="cl_s1" value="#5a3a0a" oninput="cv('--strip1',this.value);hx('hx_s1',this.value)"><span class="chex" id="hx_s1">#5a3a0a</span></div>
         </div>
-        <div class="swatches">
-          <div class="sw-bg" style="background:#0a0a0a" onclick="setBg('#0a0a0a',this)"></div>
-          <div class="sw-bg" style="background:#0a0a2a" onclick="setBg('#0a0a2a',this)"></div>
-          <div class="sw-bg" style="background:#1a0000" onclick="setBg('#1a0000',this)"></div>
-          <div class="sw-bg" style="background:#001a0a" onclick="setBg('#001a0a',this)"></div>
-          <div class="sw-bg" style="background:#1a1200" onclick="setBg('#1a1200',this)"></div>
-          <div class="sw-bg" style="background:#1a1a2e" onclick="setBg('#1a1a2e',this)"></div>
-          <div class="sw-bg" style="background:#2a2a2a" onclick="setBg('#2a2a2a',this)"></div>
-          <div class="sw-bg active" style="background:#ffffff;border:1px solid #ccc" onclick="setBg('#ffffff',this)"></div>
+        <div class="ci">
+          <label>نهاية الشريط</label>
+          <div class="crow"><input type="color" id="cl_s2" value="#c9a84c" oninput="cv('--strip2',this.value);hx('hx_s2',this.value);syncAcc()"><span class="chex" id="hx_s2">#c9a84c</span></div>
         </div>
-      </div>
-
-      <div class="cpanel">
-        <div class="cpanel-title">شريط اللون والتفاصيل</div>
-        <div class="cgrid">
-          <div class="ci">
-            <label>بداية الشريط</label>
-            <div class="crow">
-              <input type="color" id="cl_s1" value="#5a3a0a" oninput="cv('--strip-color1',this.value);hx('hx_s1',this.value)">
-              <span class="chex" id="hx_s1">#5a3a0a</span>
-            </div>
-          </div>
-          <div class="ci">
-            <label>نهاية الشريط</label>
-            <div class="crow">
-              <input type="color" id="cl_s2" value="#c9a84c" oninput="cv('--strip-color2',this.value);hx('hx_s2',this.value);syncAcc()">
-              <span class="chex" id="hx_s2">#c9a84c</span>
-            </div>
-          </div>
-          <div class="ci">
-            <label>إطار الصورة</label>
-            <div class="crow">
-              <input type="color" id="cl_pb" value="#c9a84c" oninput="cv('--photo-border',this.value);hx('hx_pb',this.value)">
-              <span class="chex" id="hx_pb">#c9a84c</span>
-            </div>
-          </div>
-          <div class="ci">
-            <label>خط الفاصل</label>
-            <div class="crow">
-              <input type="color" id="cl_dv" value="#c9a84c" oninput="cv('--divider-color',this.value+'66');hx('hx_dv',this.value)">
-              <span class="chex" id="hx_dv">#c9a84c</span>
-            </div>
-          </div>
+        <div class="ci">
+          <label>إطار الصورة</label>
+          <div class="crow"><input type="color" id="cl_pb" value="#c9a84c" oninput="cv('--photo-border',this.value);hx('hx_pb',this.value)"><span class="chex" id="hx_pb">#c9a84c</span></div>
         </div>
-        <div class="swatches">
-          <div class="sw-ac" style="background:linear-gradient(135deg,#0b4a38,#1a7a5e)" onclick="setAcc('#0b4a38','#1a7a5e',this)" title="أخضر فندقي"></div>
-          <div class="sw-ac" style="background:linear-gradient(135deg,#1a3a6e,#2a6abf)" onclick="setAcc('#1a3a6e','#2a6abf',this)" title="أزرق ملكي"></div>
-          <div class="sw-ac" style="background:linear-gradient(135deg,#6e1a1a,#bf2a2a)" onclick="setAcc('#6e1a1a','#bf2a2a',this)" title="أحمر داكن"></div>
-          <div class="sw-ac active" style="background:linear-gradient(135deg,#5a3a0a,#c9a84c)" onclick="setAcc('#5a3a0a','#c9a84c',this)" title="ذهبي"></div>
-          <div class="sw-ac" style="background:linear-gradient(135deg,#3a1a6e,#7a4abf)" onclick="setAcc('#3a1a6e','#7a4abf',this)" title="بنفسجي"></div>
-          <div class="sw-ac" style="background:linear-gradient(135deg,#1a4a6e,#2aaabf)" onclick="setAcc('#1a4a6e','#2aaabf',this)" title="فيروزي"></div>
-          <div class="sw-ac" style="background:linear-gradient(135deg,#444,#999)" onclick="setAcc('#444444','#999999',this)" title="رمادي"></div>
+        <div class="ci">
+          <label>الفاصل</label>
+          <div class="crow"><input type="color" id="cl_dv" value="#c9a84c" oninput="cv('--divider',this.value+'66');hx('hx_dv',this.value)"><span class="chex" id="hx_dv">#c9a84c</span></div>
         </div>
       </div>
-
-      <!-- TEXT COLORS -->
-      <div class="sec">🖊 ألوان الخطوط</div>
-
-      <div class="cpanel">
-        <div class="cpanel-title">الواجهة الأمامية</div>
-        <div class="cgrid">
-          <div class="ci"><label>اسم الفندق ع</label><div class="crow"><input type="color" id="cl_har" value="#5d4504" oninput="cv('--txt-hotel-ar',this.value);hx('hx_har',this.value)"><span class="chex" id="hx_har">#5d4504</span></div></div>
-          <div class="ci"><label>اسم الفندق إ</label><div class="crow"><input type="color" id="cl_hen" value="#5d4504" oninput="cv('--txt-hotel-en',this.value);hx('hx_hen',this.value)"><span class="chex" id="hx_hen">#5d4504</span></div></div>
-          <div class="ci"><label>اسم الموظف ع</label><div class="crow"><input type="color" id="cl_nar" value="#000000" oninput="cv('--txt-name-ar',this.value);hx('hx_nar',this.value)"><span class="chex" id="hx_nar">#000000</span></div></div>
-          <div class="ci"><label>اسم الموظف إ</label><div class="crow"><input type="color" id="cl_nen" value="#000000" oninput="cv('--txt-name-en',this.value);hx('hx_nen',this.value)"><span class="chex" id="hx_nen">#000000</span></div></div>
-          <div class="ci"><label>القسم ع</label><div class="crow"><input type="color" id="cl_dar" value="#000000" oninput="cv('--txt-dept-ar',this.value);hx('hx_dar',this.value)"><span class="chex" id="hx_dar">#000000</span></div></div>
-          <div class="ci"><label>القسم إ</label><div class="crow"><input type="color" id="cl_den" value="#000000" oninput="cv('--txt-dept-en',this.value);hx('hx_den',this.value)"><span class="chex" id="hx_den">#000000</span></div></div>
-          <div class="ci"><label>المسمى ع</label><div class="crow"><input type="color" id="cl_tar" value="#000000" oninput="cv('--txt-title-ar',this.value);hx('hx_tar',this.value)"><span class="chex" id="hx_tar">#000000</span></div></div>
-          <div class="ci"><label>المسمى إ</label><div class="crow"><input type="color" id="cl_ten" value="#000000" oninput="cv('--txt-title-en',this.value);hx('hx_ten',this.value)"><span class="chex" id="hx_ten">#000000</span></div></div>
-          <div class="ci"><label>رقم الموظف</label><div class="crow"><input type="color" id="cl_eid" value="#c7a64b" oninput="cv('--txt-emp-id',this.value);hx('hx_eid',this.value)"><span class="chex" id="hx_eid">#c7a64b</span></div></div>
-        </div>
+      <div class="swatches" style="margin-top:8px;">
+        <div class="sw" style="background:linear-gradient(135deg,#0b4a38,#1a7a5e);" onclick="setAcc('#0b4a38','#1a7a5e',this)"></div>
+        <div class="sw" style="background:linear-gradient(135deg,#1a3a6e,#2a6abf);" onclick="setAcc('#1a3a6e','#2a6abf',this)"></div>
+        <div class="sw" style="background:linear-gradient(135deg,#6e1a1a,#bf2a2a);" onclick="setAcc('#6e1a1a','#bf2a2a',this)"></div>
+        <div class="sw active" style="background:linear-gradient(135deg,#5a3a0a,#c9a84c);" onclick="setAcc('#5a3a0a','#c9a84c',this)"></div>
+        <div class="sw" style="background:linear-gradient(135deg,#3a1a6e,#7a4abf);" onclick="setAcc('#3a1a6e','#7a4abf',this)"></div>
+        <div class="sw" style="background:linear-gradient(135deg,#1a4a6e,#2aaabf);" onclick="setAcc('#1a4a6e','#2aaabf',this)"></div>
+        <div class="sw" style="background:linear-gradient(135deg,#444,#999);" onclick="setAcc('#444444','#999999',this)"></div>
       </div>
-
-      <div class="cpanel">
-        <div class="cpanel-title">الظهر</div>
-        <div class="cgrid">
-          <div class="ci"><label>عنوان الشروط</label><div class="crow"><input type="color" id="cl_bt" value="#b3933f" oninput="cv('--back-title',this.value);hx('hx_bt',this.value)"><span class="chex" id="hx_bt">#b3933f</span></div></div>
-          <div class="ci"><label>عناوين البنود</label><div class="crow"><input type="color" id="cl_tb2" value="#000000" oninput="cv('--back-tb',this.value);hx('hx_tb2',this.value)"><span class="chex" id="hx_tb2">#000000</span></div></div>
-          <div class="ci"><label>نص البنود</label><div class="crow"><input type="color" id="cl_tp" value="#000000" oninput="cv('--back-tp',this.value);hx('hx_tp',this.value)"><span class="chex" id="hx_tp">#000000</span></div></div>
-          <div class="ci"><label>إطار QR</label><div class="crow"><input type="color" id="cl_qr" value="#e6e6e6" oninput="cv('--qr-border',this.value);hx('hx_qr',this.value)"><span class="chex" id="hx_qr">#e6e6e6</span></div></div>
-        </div>
-      </div>
-
-      <button class="btn-reset" onclick="resetColors()">↺ إعادة الألوان الافتراضية</button>
-
-      <!-- INFO -->
-      <div class="sec">معلومات الفندق</div>
-      <div class="fg"><label>اسم الفندق (عربي)</label><input type="text" id="hotelAr" value="فنـدق الانبـار الـدولي" oninput="upd()"></div>
-      <div class="fg"><label>Hotel Name (English)</label><input type="text" id="hotelEn" value="ANBAR INTERNATIONAL HOTEL" oninput="upd()">
-        <div class="fs-row"><span>حجم</span><input type="range" min="6" max="18" value="14" oninput="setFs('hnen',this.value)"><span class="fs-val" id="hnen-v">14px</span></div>
-      </div>
-
-      <div class="sec">معلومات الموظف</div>
-      <div class="fg"><label>الاسم (عربي)</label><input type="text" id="nameAr" value="حارث موفق جاسم" oninput="upd()">
-        <div class="fs-row"><span>حجم</span><input type="range" min="10" max="28" value="18" oninput="setFs('enar',this.value)"><span class="fs-val" id="enar-v">18px</span></div>
-      </div>
-      <div class="fg"><label>Name (English)</label><input type="text" id="nameEn" value="Harith M. muafaq" oninput="upd()">
-        <div class="fs-row"><span>حجم</span><input type="range" min="8" max="22" value="16" oninput="setFs('enen',this.value)"><span class="fs-val" id="enen-v">16px</span></div>
-      </div>
-      <div class="fg"><label>القسم (عربي)</label><input type="text" id="deptAr" value="تكنلوجيا المعلومات" oninput="upd()">
-        <div class="fs-row"><span>حجم</span><input type="range" min="8" max="24" value="16" oninput="setFs('dar',this.value)"><span class="fs-val" id="dar-v">16px</span></div>
-      </div>
-      <div class="fg"><label>Department (English)</label><input type="text" id="deptEn" value="I.T. Department" oninput="upd()">
-        <div class="fs-row"><span>حجم</span><input type="range" min="6" max="18" value="14" oninput="setFs('den',this.value)"><span class="fs-val" id="den-v">14px</span></div>
-      </div>
-      <div class="fg"><label>المسمى الوظيفي (عربي)</label><input type="text" id="titleAr" value="مهندس" oninput="upd()">
-        <div class="fs-row"><span>حجم</span><input type="range" min="8" max="24" value="16" oninput="setFs('tar',this.value)"><span class="fs-val" id="tar-v">16px</span></div>
-      </div>
-      <div class="fg"><label>Job Title (English)</label><input type="text" id="titleEn" value="A.V. Engineer" oninput="upd()">
-        <div class="fs-row"><span>حجم</span><input type="range" min="6" max="18" value="14" oninput="setFs('ten',this.value)"><span class="fs-val" id="ten-v">14px</span></div>
-      </div>
-      <div class="fg">
-        <label>رقم الموظف (4 أرقام)</label>
-        <div style="display:flex;align-items:center;gap:6px;">
-          <span style="font-size:12px;color:#c9a84c;font-family:'Montserrat',sans-serif;font-weight:700;white-space:nowrap;">AIH No.</span>
-          <input type="text" id="empNum" value="0159" maxlength="4" placeholder="0000"
-            style="width:70px;text-align:center;font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;letter-spacing:4px;color:#c9a84c;"
-            oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4);upd()">
-        </div>
-      </div>
-
-      <div class="sec">صورة الموظف (الواجهة)</div>
-      <div class="upl"><input type="file" accept="image/*" onchange="loadPhoto(event)"><span id="uplbl">📷 اضغط لرفع الصورة</span></div>
-      <div class="photo-ctrl" id="photoCtrl">
-        <span class="ctrl-lbl">تحكم بموضع الصورة</span>
-        <div class="ctrl-row"><span>تكبير</span><input type="range" min="50" max="300" value="100" id="imgScale" oninput="updatePhoto()"><span class="ctrl-val" id="scaleVal">100%</span></div>
-        <div class="ctrl-row"><span>يمين/يسار</span><input type="range" min="-120" max="120" value="0" id="imgX" oninput="updatePhoto()"><span class="ctrl-val" id="xVal">0</span></div>
-        <div class="ctrl-row"><span>أعلى/أسفل</span><input type="range" min="-120" max="120" value="0" id="imgY" oninput="updatePhoto()"><span class="ctrl-val" id="yVal">0</span></div>
-        <button class="reset-photo" onclick="resetPhoto()">↺ إعادة ضبط</button>
-      </div>
-
-      <div class="sec">الظهر — صورة + QR</div>
-      <div class="lock-row">
-        <span>تحريك العناصر بالظهر</span>
-        <button class="lock-btn" id="lockBtn" onclick="toggleLock()">🔓 تحرير</button>
-      </div>
-      <div class="fg">
-        <label>صورة الظهر (أعلى يسار)</label>
-        <div class="upl"><input type="file" accept="image/*" onchange="loadBackImg(event)"><span id="backImgLbl">🖼 رفع صورة الظهر</span></div>
-        <div class="qr-size-row" style="margin-top:5px;">
-          <span style="font-size:10px;color:#666;min-width:40px;">الحجم</span>
-          <input type="range" min="40" max="150" value="60" id="backImgSize" oninput="updateBackImgSize()" style="flex:1;height:3px;accent-color:#1a7a5e;">
-          <span class="qr-size-val" id="backImgSizeVal" style="color:#1a7a5e;">60px</span>
-        </div>
-      </div>
-      <div class="qr-box">
-        <span class="ql">📷 QR Code — ارفع صورة QR</span>
-        <div class="upl" style="margin-top:4px;border-color:#c9a84c44;"><input type="file" accept="image/*" onchange="loadQRImg(event)"><span id="qrImgLbl">🔲 رفع صورة QR Code</span></div>
-        <div class="qr-size-row">
-          <span>الحجم</span>
-          <input type="range" min="40" max="150" value="109" id="qrSize" oninput="updateQRSize()">
-          <span class="qr-size-val" id="qrSizeVal">109px</span>
-        </div>
-      </div>
-
-      <div class="sec">نص الشروط</div>
-      <div class="fg"><label>Identification</label>
-        <textarea id="t1" oninput="upd()">Carry the ID card at all times during working hours for identification purposes.</textarea>
-        <div class="fs-row"><span>حجم</span><input type="range" min="6" max="16" value="15" oninput="setFs('tp1',this.value)"><span class="fs-val" id="tp1-v">15px</span></div>
-      </div>
-      <div class="fg"><label>Authorized Use</label>
-        <textarea id="t2" oninput="upd()">The ID card is strictly for official use and should not be shared or used for unauthorized purposes.</textarea>
-        <div class="fs-row"><span>حجم</span><input type="range" min="6" max="16" value="15" oninput="setFs('tp2',this.value)"><span class="fs-val" id="tp2-v">15px</span></div>
-      </div>
-
-      <div class="save-area">
-        <div class="sa-title">الحفظ والطباعة</div>
-        <div class="btns">
-          <button class="btn b1" onclick="saveFront()">💾 الواجهة</button>
-          <button class="btn b2" onclick="saveBack()">💾 الظهر</button>
-        </div>
-        <button class="btn b3" style="width:100%;margin-bottom:6px;padding:9px;" onclick="saveBoth()">💾 حفظ الاثنين معاً</button>
-        <div class="save-scale-row">
-          <span>جودة الحفظ</span>
-          <input type="range" min="1" max="5" value="5" id="saveScale" oninput="document.getElementById('saveScaleVal').textContent=this.value+'x'">
-          <span class="save-scale-val" id="saveScaleVal">5x</span>
-        </div>
-        <button class="print-btn" onclick="window.print()">🖨 طباعة الاثنين</button>
-      </div>
-
     </div>
+
+    <div class="sec">ألوان الخطوط — الواجهة</div>
+    <div class="panel">
+      <div class="cgrid">
+        <div class="ci"><label>اسم الفندق ع</label><div class="crow"><input type="color" id="cl_har" value="#5d4504" oninput="cv('--hotel-ar',this.value);hx('hx_har',this.value)"><span class="chex" id="hx_har">#5d4504</span></div></div>
+        <div class="ci"><label>اسم الفندق إ</label><div class="crow"><input type="color" id="cl_hen" value="#5d4504" oninput="cv('--hotel-en',this.value);hx('hx_hen',this.value)"><span class="chex" id="hx_hen">#5d4504</span></div></div>
+        <div class="ci"><label>اسم الموظف ع</label><div class="crow"><input type="color" id="cl_nar" value="#1a1400" oninput="cv('--name-ar',this.value);hx('hx_nar',this.value)"><span class="chex" id="hx_nar">#1a1400</span></div></div>
+        <div class="ci"><label>اسم الموظف إ</label><div class="crow"><input type="color" id="cl_nen" value="#1a1400" oninput="cv('--name-en',this.value);hx('hx_nen',this.value)"><span class="chex" id="hx_nen">#1a1400</span></div></div>
+        <div class="ci"><label>القسم ع</label><div class="crow"><input type="color" id="cl_dar" value="#2a2000" oninput="cv('--dept-ar',this.value);hx('hx_dar',this.value)"><span class="chex" id="hx_dar">#2a2000</span></div></div>
+        <div class="ci"><label>القسم إ</label><div class="crow"><input type="color" id="cl_den" value="#2a2000" oninput="cv('--dept-en',this.value);hx('hx_den',this.value)"><span class="chex" id="hx_den">#2a2000</span></div></div>
+        <div class="ci"><label>المسمى ع</label><div class="crow"><input type="color" id="cl_tar" value="#2a2000" oninput="cv('--title-ar',this.value);hx('hx_tar',this.value)"><span class="chex" id="hx_tar">#2a2000</span></div></div>
+        <div class="ci"><label>المسمى إ</label><div class="crow"><input type="color" id="cl_ten" value="#2a2000" oninput="cv('--title-en',this.value);hx('hx_ten',this.value)"><span class="chex" id="hx_ten">#2a2000</span></div></div>
+        <div class="ci"><label>رقم الموظف</label><div class="crow"><input type="color" id="cl_eid" value="#ffffff" oninput="cv('--emp-id',this.value);hx('hx_eid',this.value)"><span class="chex" id="hx_eid">#ffffff</span></div></div>
+      </div>
+    </div>
+
+    <div class="sec">ألوان الخطوط — الظهر</div>
+    <div class="panel">
+      <div class="cgrid">
+        <div class="ci"><label>عنوان الشروط</label><div class="crow"><input type="color" id="cl_bt" value="#b3933f" oninput="cv('--back-title',this.value);hx('hx_bt',this.value)"><span class="chex" id="hx_bt">#b3933f</span></div></div>
+        <div class="ci"><label>عناوين البنود</label><div class="crow"><input type="color" id="cl_tb2" value="#1a1400" oninput="cv('--back-tb',this.value);hx('hx_tb2',this.value)"><span class="chex" id="hx_tb2">#1a1400</span></div></div>
+        <div class="ci"><label>نص البنود</label><div class="crow"><input type="color" id="cl_tp" value="#2a2000" oninput="cv('--back-tp',this.value);hx('hx_tp',this.value)"><span class="chex" id="hx_tp">#2a2000</span></div></div>
+        <div class="ci"><label>إطار QR</label><div class="crow"><input type="color" id="cl_qr" value="#c9a84c" oninput="cv('--qr-border',this.value);hx('hx_qr',this.value)"><span class="chex" id="hx_qr">#c9a84c</span></div></div>
+      </div>
+    </div>
+
+    <button class="reset-btn" style="margin-top:4px;" onclick="resetColors()">↺ إعادة الألوان الافتراضية</button>
   </div>
 
-  <!-- ===== PREVIEW ZONE ===== -->
-  <div class="preview-zone">
-    <div class="zone-bar">
-      <svg viewBox="0 0 12 14"><path d="M6 1v12M2 4l4-4 4 4M2 10l4 4 4-4"/></svg>
-      <span>منطقة البطاقة — مرر الماوس هنا لتحريك البطاقة مستقلاً</span>
+  <!-- TAB: BACK -->
+  <div class="tab-panel" id="tab-back">
+    <div class="sec">تحريك العناصر</div>
+    <div class="lock-strip">
+      <span>تحريك صورة QR و الصورة الاعلى</span>
+      <button class="lock-btn" id="lockBtn" onclick="toggleLock()">تحرير</button>
     </div>
-    <div class="preview" id="cardsWrap">
-      <div class="plabel">معاينة مباشرة — Live Preview</div>
 
-      <!-- FRONT -->
-      <div class="card-wrap">
-        <div class="card-lbl">الواجهة — Front</div>
-        <div class="card" id="cardFront">
-          <div class="strip" id="stripF"></div>
-          <div class="cbody">
-            <img class="clogo" id="logoF" src="logo.png" alt="">
-            <div class="hnar" id="c-hotelAr" style="font-size:14px">فنـدق الانبـار الـدولي</div>
-            <div class="hnen" id="c-hotelEn" style="font-size:14px">ANBAR INTERNATIONAL HOTEL</div>
-            <div class="pframe" id="c-photo"><div class="pph">الصورة<br>الشخصية</div></div>
-            <div class="enar" id="c-nameAr" style="font-size:18px">حارث موفق جاسم</div>
-            <div class="enen" id="c-nameEn" style="font-size:16px">Harith M. muafaq</div>
-            <div class="dar" id="c-deptAr" style="font-size:16px">تكنلوجيا المعلومات</div>
-            <div class="den" id="c-deptEn" style="font-size:14px">I.T. Department</div>
-            <div class="tar" id="c-titleAr" style="font-size:16px">مهندس</div>
-            <div class="ten" id="c-titleEn" style="font-size:14px">A.V. Engineer</div>
-            <div class="emp-id-badge"><span class="emp-id-text" id="c-empId">AIH NO.   0159</span></div>
-          </div>
-        </div>
+    <div class="sec">صورة الشعار (أعلى)</div>
+    <div class="upl" id="backUpl" onclick="document.getElementById('backFileInput').click()">
+      <input type="file" id="backFileInput" accept="image/*" onchange="loadBackImg(event)" style="display:none;">
+      <span class="upload-icon">🖼</span>
+      <span id="backImgLbl">رفع صورة الظهر</span>
+    </div>
+    <div class="sz-row">
+      <span>الحجم</span>
+      <input type="range" min="40" max="150" value="60" id="backImgSize" oninput="updateBackImgSize()">
+      <span class="sz-val" id="backImgSizeVal">60px</span>
+    </div>
+
+    <div style="margin-top:10px;">
+      <div class="fg" style="margin-bottom:4px;"><label>طريقة عرض الصورة</label></div>
+      <div class="mode-row">
+        <button class="mode-btn active" id="backModeContain" onclick="setBackPhotoMode('contain')">كاملة بدون قطع</button>
+        <button class="mode-btn" id="backModeCover" onclick="setBackPhotoMode('cover')">ملء الإطار</button>
       </div>
+    </div>
 
-      <!-- BACK -->
-      <div class="card-wrap">
-        <div class="card-lbl">الظهر — Back</div>
-        <div class="card" id="cardBack">
-          <div class="strip" id="stripB"></div>
-          <div class="bbody">
-            <img class="blogo" id="logoB" src="logo.png" alt="">
-            <div class="btit" style="font-size:10px">TERMS &amp; CONDITIONS</div>
-            <div class="tblock">
-              <span class="tb" style="font-size:9px">Identification:</span>
-              <p class="tp" id="c-t1" style="font-size:15px">Carry the ID card at all times during working hours for identification purposes.</p>
-            </div>
-            <div class="tblock">
-              <span class="tb" style="font-size:9px">Authorized Use:</span>
-              <p class="tp" id="c-t2" style="font-size:15px">The ID card is strictly for official use and should not be shared or used for unauthorized purposes.</p>
-            </div>
-            <div class="back-overlay" id="backOverlay">
-              <div class="draggable-item" id="dragBackImg" style="left:219px;top:16px;">
-                <div class="drag-handle"><span>✥ صورة</span></div>
-                <div class="back-img-frame" id="backImgFrame" style="width:60px;height:60px;"><div class="back-img-ph">صورة<br>الظهر</div></div>
-              </div>
-              <div class="draggable-item" id="dragQR" style="left:25px;top:302px;">
-                <div class="drag-handle"><span>✥ QR</span></div>
-                <div class="qr-frame" id="qrFrame" style="width:109px;height:109px;"><div class="qr-ph">QR<br>Code</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="photo-ctrl" id="backPhotoCtrl" style="display:none;">
+      <div class="sec" style="margin-top:14px;">
+        <svg viewBox="0 0 12 12"><path d="M6 1v10M1 6h10"/></svg>
+        التحكم بالصورة
+      </div>
+      <div class="ctrl-row"><span>تكبير</span><input type="range" min="50" max="300" value="100" id="backImgScale" oninput="updateBackImgCanvas()"><span class="ctrl-val" id="backScaleVal">100%</span></div>
+      <div class="ctrl-row"><span>يمين/يسار</span><input type="range" min="-200" max="200" value="0" id="backImgX" oninput="updateBackImgCanvas()"><span class="ctrl-val" id="backXVal">0</span></div>
+      <div class="ctrl-row"><span>أعلى/أسفل</span><input type="range" min="-200" max="200" value="0" id="backImgY" oninput="updateBackImgCanvas()"><span class="ctrl-val" id="backYVal">0</span></div>
+      <button class="reset-btn" onclick="resetBackPhoto()">↺ إعادة ضبط الصورة</button>
+    </div>
+
+    <div class="sec" style="margin-top:14px;">QR Code</div>
+    <div class="qr-box">
+      <span class="ql">ارفع صورة QR Code</span>
+      <div class="upl" id="qrUpl" style="border-color:#c9a84c44;height:50px;" onclick="document.getElementById('qrFileInput').click()">
+        <input type="file" id="qrFileInput" accept="image/*" onchange="loadQRImg(event)" style="display:none;">
+        <span class="upload-icon">📱</span>
+        <span id="qrImgLbl">رفع صورة QR</span>
+      </div>
+      <div class="sz-row">
+        <span>الحجم</span>
+        <input type="range" min="40" max="150" value="109" id="qrSize" oninput="updateQRSize()">
+        <span class="sz-val" id="qrSizeVal">109px</span>
       </div>
     </div>
   </div>
+</div>
 
+<!-- PREVIEW ZONE -->
+<div class="preview-zone">
+  <div class="status-bar">
+    <div class="status-dot"></div>
+    <div class="status-item"><span>الحجم:</span><strong id="statusSize">290 × 460 px</strong></div>
+    <div style="width:1px;height:12px;background:var(--ui-border);"></div>
+    <div class="status-item"><span>معاينة مباشرة</span></div>
+  </div>
+  <div class="preview-header">
+    <div class="preview-dot"></div>
+    <span>Live Preview — معاينة فورية</span>
+  </div>
+  <div class="preview" id="cardsWrap">
+
+    <!-- FRONT -->
+    <div class="card-wrap">
+      <div class="card-badge">الواجهة — Front</div>
+      <div class="card" id="cardFront">
+        <div class="strip" id="stripF"></div>
+        <div class="cbody">
+          <div id="logoFWrap" style="display:flex;align-items:center;justify-content:center;">
+            <img class="clogo" id="logoF" src="logo.png" alt="" onerror="showLogoPlaceholder('logoF','logoFWrap')">
+          </div>
+          <div class="hnar" id="c-hotelAr" style="font-size:14px">فنـدق الانبـار الـدولي</div>
+          <div class="hnen" id="c-hotelEn" style="font-size:14px">ANBAR INTERNATIONAL HOTEL</div>
+          <div class="pframe" id="c-photo"><div class="pph">📷<br>الصورة<br>الشخصية</div></div>
+          <div class="enar" id="c-nameAr" style="font-size:18px">حارث موفق جاسم</div>
+          <div class="enen" id="c-nameEn" style="font-size:16px">Harith M. Muafaq</div>
+          <div class="divl"></div>
+          <div class="dar" id="c-deptAr" style="font-size:16px">تكنولوجيا المعلومات</div>
+          <div class="den" id="c-deptEn" style="font-size:14px">I.T. Department</div>
+          <div class="tar" id="c-titleAr" style="font-size:16px">مهندس</div>
+          <div class="ten" id="c-titleEn" style="font-size:14px">A.V. Engineer</div>
+          <div class="emp-id-badge"><span class="emp-id-text" id="c-empId">AIH NO. 0159</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BACK -->
+    <div class="card-wrap">
+      <div class="card-badge">الظهر — Back</div>
+      <div class="card" id="cardBack">
+        <div class="strip" id="stripB"></div>
+        <div class="bbody">
+          <div id="logoBWrap" style="margin-bottom:6px;">
+            <img class="blogo" id="logoB" src="logo.png" alt="" onerror="showLogoPlaceholder('logoB','logoBWrap')">
+          </div>
+          <div class="btit" style="font-size:10px">TERMS &amp; CONDITIONS</div>
+          <div class="tblock">
+            <span class="tb" style="font-size:9px">Identification:</span>
+            <p class="tp" id="c-t1" style="font-size:15px">Carry the ID card at all times during working hours for identification purposes.</p>
+          </div>
+          <div class="tblock">
+            <span class="tb" style="font-size:9px">Authorized Use:</span>
+            <p class="tp" id="c-t2" style="font-size:15px">The ID card is strictly for official use and should not be shared or used for unauthorized purposes.</p>
+          </div>
+          <div class="back-overlay" id="backOverlay">
+            <!-- Back image: fixed contain, never distorts -->
+            <div class="draggable-item" id="dragBackImg" style="left:219px;top:16px;">
+              <div class="drag-handle"><span>✥ صورة</span></div>
+              <div class="back-img-frame" id="backImgFrame" style="width:60px;height:60px;">
+                <div class="back-img-ph">🖼<br>شعار<br>الظهر</div>
+              </div>
+            </div>
+            <div class="draggable-item" id="dragQR" style="left:25px;top:302px;">
+              <div class="drag-handle"><span>✥ QR</span></div>
+              <div class="qr-frame" id="qrFrame" style="width:109px;height:109px;"><div class="qr-ph">QR<br>Code</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
 </div>
 
 <script>
-// ===== CSS VAR HELPERS =====
-function cv(varName, val) { document.documentElement.style.setProperty(varName, val); }
-function hx(id, val) { var el = document.getElementById(id); if(el) el.textContent = val; }
+function cv(v,val){document.documentElement.style.setProperty(v,val);}
+function hx(id,val){var el=document.getElementById(id);if(el)el.textContent=val;}
 
-// ===== BACKGROUND SWATCHES =====
-function setBg(hex, el) {
-  document.querySelectorAll('.sw-bg').forEach(function(e){ e.classList.remove('active'); });
+function showLogoPlaceholder(imgId,wrapId){
+  var wrap=document.getElementById(wrapId);
+  var img=document.getElementById(imgId);
+  if(!wrap||!img)return;
+  img.style.display='none';
+  if(wrap.querySelector('.logo-placeholder'))return;
+  var ph=document.createElement('div');
+  ph.className='logo-placeholder';
+  ph.id=imgId+'-ph';
+  if(imgId==='logoF'){var lSz=Math.round(CW*0.22);ph.style.cssText='width:'+lSz+'px;height:'+lSz+'px;font-size:8px;';}
+  else{var blSz=Math.round(CW*0.30);ph.style.cssText='width:'+blSz+'px;height:'+blSz+'px;font-size:7px;';}
+  ph.innerHTML='🏨<br>LOGO<br>الشعار';
+  wrap.appendChild(ph);
+}
+
+function updateLogoPlaceholders(){
+  var fPh=document.getElementById('logoF-ph');
+  if(fPh){var lSz=Math.round(CW*0.22);fPh.style.width=lSz+'px';fPh.style.height=lSz+'px';}
+  var bPh=document.getElementById('logoB-ph');
+  if(bPh){var blSz=Math.round(CW*0.30);bPh.style.width=blSz+'px';bPh.style.height=blSz+'px';}
+}
+
+function switchTab(t){
+  document.querySelectorAll('.stab').forEach(function(e,i){e.classList.toggle('active',['info','photo','design','back'][i]===t);});
+  document.querySelectorAll('.tab-panel').forEach(function(e){e.classList.remove('active');});
+  document.getElementById('tab-'+t).classList.add('active');
+}
+
+function setBg(hex,el){
+  document.querySelectorAll('.sw').forEach(function(e){e.classList.remove('active');});
   el.classList.add('active');
-  cv('--card-bg', hex);
-  document.getElementById('cl_bg').value = hex;
-  hx('hx_bg', hex);
+  cv('--card-bg',hex);
+  document.getElementById('cl_bg').value=hex;hx('hx_bg',hex);
 }
 
-// ===== ACCENT SWATCHES =====
-function setAcc(c1, c2, el) {
-  document.querySelectorAll('.sw-ac').forEach(function(e){ e.classList.remove('active'); });
+function setAcc(c1,c2,el){
+  document.querySelectorAll('.sw').forEach(function(e){e.classList.remove('active');});
   el.classList.add('active');
-  cv('--strip-color1', c1); cv('--strip-color2', c2);
-  cv('--photo-border', c2); cv('--divider-color', c2 + '66');
-  cv('--back-logo-border', c2); cv('--qr-border', c2); cv('--drag-handle-bg', c2);
-  document.getElementById('cl_s1').value = c1; hx('hx_s1', c1);
-  document.getElementById('cl_s2').value = c2; hx('hx_s2', c2);
-  document.getElementById('cl_pb').value = c2; hx('hx_pb', c2);
-  document.getElementById('cl_dv').value = c2; hx('hx_dv', c2);
-  document.getElementById('cl_qr').value = c2; hx('hx_qr', c2);
-}
-function syncAcc() {
-  var c2 = document.getElementById('cl_s2').value;
-  cv('--photo-border', c2); cv('--divider-color', c2 + '66');
-  cv('--back-logo-border', c2); cv('--drag-handle-bg', c2);
+  cv('--strip1',c1);cv('--strip2',c2);
+  cv('--photo-border',c2);cv('--divider',c2+'66');
+  cv('--accent',c2);cv('--drag-handle',c2);
+  document.getElementById('cl_s1').value=c1;hx('hx_s1',c1);
+  document.getElementById('cl_s2').value=c2;hx('hx_s2',c2);
+  document.getElementById('cl_pb').value=c2;hx('hx_pb',c2);
+  document.getElementById('cl_dv').value=c2;hx('hx_dv',c2);
 }
 
-// ===== RESET COLORS — يعيد إلى إعدادات المستخدم الافتراضية =====
-var DEF = {
-  cl_bg:'#e6e6e6', cl_s1:'#5a3a0a', cl_s2:'#c9a84c', cl_pb:'#c9a84c', cl_dv:'#c9a84c',
-  cl_har:'#5d4504', cl_hen:'#5d4504', cl_nar:'#000000', cl_nen:'#000000',
-  cl_dar:'#000000', cl_den:'#000000', cl_tar:'#000000', cl_ten:'#000000',
-  cl_eid:'#c7a64b', cl_bt:'#b3933f', cl_tb2:'#000000', cl_tp:'#000000', cl_qr:'#e6e6e6'
-};
-var VMAP = {
-  cl_bg:'--card-bg', cl_s1:'--strip-color1', cl_s2:'--strip-color2',
-  cl_pb:'--photo-border', cl_dv:'--divider-color',
-  cl_har:'--txt-hotel-ar', cl_hen:'--txt-hotel-en',
-  cl_nar:'--txt-name-ar', cl_nen:'--txt-name-en',
-  cl_dar:'--txt-dept-ar', cl_den:'--txt-dept-en',
-  cl_tar:'--txt-title-ar', cl_ten:'--txt-title-en',
-  cl_eid:'--txt-emp-id', cl_bt:'--back-title', cl_tb2:'--back-tb', cl_tp:'--back-tp', cl_qr:'--qr-border'
-};
-function resetColors() {
-  Object.keys(DEF).forEach(function(id) {
-    var hex = DEF[id];
-    var inp = document.getElementById(id); if(inp) inp.value = hex;
-    var hxEl = document.getElementById(id.replace('cl_','hx_')); if(hxEl) hxEl.textContent = hex;
-    var v = VMAP[id]; if(!v) return;
-    if(id === 'cl_dv') cv(v, hex + '66');
-    else cv(v, hex);
+function syncAcc(){
+  var c2=document.getElementById('cl_s2').value;
+  cv('--photo-border',c2);cv('--divider',c2+'66');cv('--accent',c2);cv('--drag-handle',c2);
+}
+
+function resetColors(){
+  var D={cl_bg:'#e8e6e0',cl_s1:'#5a3a0a',cl_s2:'#c9a84c',cl_pb:'#c9a84c',cl_dv:'#c9a84c',
+    cl_har:'#5d4504',cl_hen:'#5d4504',cl_nar:'#1a1400',cl_nen:'#1a1400',
+    cl_dar:'#2a2000',cl_den:'#2a2000',cl_tar:'#2a2000',cl_ten:'#2a2000',
+    cl_eid:'#ffffff',cl_bt:'#b3933f',cl_tb2:'#1a1400',cl_tp:'#2a2000',cl_qr:'#c9a84c'};
+  var VM={cl_bg:'--card-bg',cl_s1:'--strip1',cl_s2:'--strip2',cl_pb:'--photo-border',cl_dv:'--divider',
+    cl_har:'--hotel-ar',cl_hen:'--hotel-en',cl_nar:'--name-ar',cl_nen:'--name-en',
+    cl_dar:'--dept-ar',cl_den:'--dept-en',cl_tar:'--title-ar',cl_ten:'--title-en',
+    cl_eid:'--emp-id',cl_bt:'--back-title',cl_tb2:'--back-tb',cl_tp:'--back-tp',cl_qr:'--qr-border'};
+  Object.keys(D).forEach(function(id){
+    var hex=D[id],inp=document.getElementById(id);if(inp)inp.value=hex;
+    var hEl=document.getElementById(id.replace('cl_','hx_'));if(hEl)hEl.textContent=hex;
+    var v=VM[id];if(!v)return;
+    cv(v,id==='cl_dv'?hex+'66':hex);
   });
-  document.querySelectorAll('.sw-bg').forEach(function(e,i){ e.classList.toggle('active', i===7); });
-  document.querySelectorAll('.sw-ac').forEach(function(e,i){ e.classList.toggle('active', i===3); });
   syncAcc();
 }
 
-// ===== SIZE =====
-var CW=290, CH=460;
-function applySize() {
+var CW=290,CH=460;
+function applySize(){
   CW=Math.max(150,Math.min(600,parseInt(document.getElementById('cardW').value)||290));
   CH=Math.max(200,Math.min(900,parseInt(document.getElementById('cardH').value)||460));
-  document.getElementById('cardW').value=CW; document.getElementById('cardH').value=CH;
+  document.getElementById('cardW').value=CW;document.getElementById('cardH').value=CH;
   updateCardSize();
 }
-function setPreset(w,h){ document.getElementById('cardW').value=w; document.getElementById('cardH').value=h; CW=w; CH=h; updateCardSize(); }
-function updateCardSize() {
-  var sH=Math.round(CH*0.07),sW=Math.round(CW*0.26),lSz=Math.round(CW*0.22),blSz=Math.round(CW*0.30),pW=Math.round(CW*0.38),pH=Math.round(CH*0.27);
-  ['cardFront','cardBack'].forEach(function(id){ var c=document.getElementById(id); c.style.width=CW+'px'; c.style.height=CH+'px'; });
-  ['stripF','stripB'].forEach(function(id){ var s=document.getElementById(id); s.style.height=sH+'px'; s.style.width=sW+'px'; });
-  var lf=document.getElementById('logoF'); lf.style.width=lSz+'px'; lf.style.height=lSz+'px';
-  var lb=document.getElementById('logoB'); lb.style.width=blSz+'px'; lb.style.height=blSz+'px';
-  var pf=document.getElementById('c-photo'); pf.style.width=pW+'px'; pf.style.height=pH+'px';
-  document.getElementById('sizeDisplay').textContent=CW+' × '+CH+' px';
+function setPreset(w,h){document.getElementById('cardW').value=w;document.getElementById('cardH').value=h;CW=w;CH=h;updateCardSize();}
+function updateCardSize(){
+  var sH=Math.round(CH*.07),sW=Math.round(CW*.26),lSz=Math.round(CW*.22),blSz=Math.round(CW*.30),pW=Math.round(CW*.38),pH=Math.round(CH*.27);
+  ['cardFront','cardBack'].forEach(function(id){var c=document.getElementById(id);c.style.width=CW+'px';c.style.height=CH+'px';});
+  ['stripF','stripB'].forEach(function(id){var s=document.getElementById(id);s.style.height=sH+'px';s.style.width=sW+'px';});
+  var lf=document.getElementById('logoF');if(lf)lf.style.cssText='width:'+lSz+'px;height:'+lSz+'px;';
+  var lb=document.getElementById('logoB');if(lb)lb.style.cssText='width:'+blSz+'px;height:'+blSz+'px;';
+  var pf=document.getElementById('c-photo');pf.style.width=pW+'px';pf.style.height=pH+'px';
+  var txt=CW+' × '+CH+' px';
+  document.getElementById('sizeDisplay').textContent=txt;
+  document.getElementById('statusSize').textContent=txt;
+  updatePhotoCanvas();
+  updateLogoPlaceholders();
 }
 updateCardSize();
 
-// ===== TEXT =====
-function upd() {
+function upd(){
   document.getElementById('c-hotelAr').textContent=document.getElementById('hotelAr').value;
   document.getElementById('c-hotelEn').textContent=document.getElementById('hotelEn').value;
   document.getElementById('c-nameAr').textContent=document.getElementById('nameAr').value;
@@ -666,76 +897,243 @@ function upd() {
   document.getElementById('c-t1').textContent=document.getElementById('t1').value;
   document.getElementById('c-t2').textContent=document.getElementById('t2').value;
   var num=document.getElementById('empNum').value.padStart(4,'0');
-  document.getElementById('c-empId').textContent='AIH NO   '+num;
+  document.getElementById('c-empId').textContent='AIH NO. '+num;
 }
 
 var fsMap={hnen:'c-hotelEn',enar:'c-nameAr',enen:'c-nameEn',dar:'c-deptAr',den:'c-deptEn',tar:'c-titleAr',ten:'c-titleEn',tp1:'c-t1',tp2:'c-t2'};
-function setFs(cls,val){ val=parseInt(val); document.getElementById(fsMap[cls]).style.fontSize=val+'px'; document.getElementById(cls+'-v').textContent=val+'px'; }
+function setFs(cls,val){val=parseInt(val);document.getElementById(fsMap[cls]).style.fontSize=val+'px';document.getElementById(cls+'-v').textContent=val+'px';}
 
-// ===== FRONT PHOTO =====
-var photoImg=null;
-function loadPhoto(e) {
-  var f=e.target.files[0]; if(!f) return;
+var photoSrc=null,photoMode='contain';
+var backImgSrc=null,backImgMode='contain';
+function setPhotoMode(m){
+  photoMode=m;
+  document.getElementById('modeContain').classList.toggle('active',m==='contain');
+  document.getElementById('modeCover').classList.toggle('active',m==='cover');
+  updatePhotoCanvas();
+}
+function setBackPhotoMode(m){
+  backImgMode=m;
+  document.getElementById('backModeContain').classList.toggle('active',m==='contain');
+  document.getElementById('backModeCover').classList.toggle('active',m==='cover');
+  updateBackImgCanvas();
+}
+
+function loadPhoto(e){
+  var f=e.target.files[0];if(!f)return;
   var r=new FileReader();
-  r.onload=function(ev){ var frame=document.getElementById('c-photo'); frame.innerHTML='<img id="photoEl" src="'+ev.target.result+'" draggable="false">'; photoImg=document.getElementById('photoEl'); document.getElementById('uplbl').textContent='✓ تم رفع الصورة'; document.getElementById('photoCtrl').style.display='block'; document.getElementById('imgScale').value=100; document.getElementById('imgX').value=0; document.getElementById('imgY').value=0; updatePhoto(); };
+  r.onload=function(ev){
+    photoSrc=ev.target.result;
+    document.getElementById('uplbl').textContent='✓ تم رفع الصورة';
+    document.getElementById('photoUpl').classList.add('uploaded');
+    document.getElementById('photoThumbImg').src=ev.target.result;
+    document.getElementById('photoThumb').style.display='block';
+    document.getElementById('reuploadWrap').style.display='block';
+    document.getElementById('photoUpl').style.display='none';
+    document.getElementById('photoCtrl').style.display='block';
+    document.getElementById('imgScale').value=100;
+    document.getElementById('imgX').value=0;
+    document.getElementById('imgY').value=0;
+    updatePhotoCanvas();
+  };
   r.readAsDataURL(f);
+  e.target.value='';
 }
-function updatePhoto() {
-  if(!photoImg) return;
-  var sc=parseInt(document.getElementById('imgScale').value),x=parseInt(document.getElementById('imgX').value),y=parseInt(document.getElementById('imgY').value);
-  document.getElementById('scaleVal').textContent=sc+'%'; document.getElementById('xVal').textContent=x; document.getElementById('yVal').textContent=y;
-  photoImg.style.transform='translate('+x+'px,'+y+'px) scale('+(sc/100)+')';
-}
-function resetPhoto(){ document.getElementById('imgScale').value=100; document.getElementById('imgX').value=0; document.getElementById('imgY').value=0; updatePhoto(); }
 
-// ===== BACK IMAGE =====
-function loadBackImg(e) {
-  var f=e.target.files[0]; if(!f) return;
+function updatePhotoCanvas(){
+  var frame=document.getElementById('c-photo');
+  if(!photoSrc){return;}
+  frame.innerHTML='';
+  var fw=frame.offsetWidth||parseInt(frame.style.width)||110;
+  var fh=frame.offsetHeight||parseInt(frame.style.height)||124;
+  var sc=parseInt(document.getElementById('imgScale').value)/100;
+  var ox=parseInt(document.getElementById('imgX').value);
+  var oy=parseInt(document.getElementById('imgY').value);
+  document.getElementById('scaleVal').textContent=Math.round(sc*100)+'%';
+  document.getElementById('xVal').textContent=ox;
+  document.getElementById('yVal').textContent=oy;
+  var img=new Image();
+  img.onload=function(){
+    var dpr=Math.max(window.devicePixelRatio||1,4);
+    var canvas=document.createElement('canvas');
+    canvas.width=fw*dpr;canvas.height=fh*dpr;
+    canvas.style.cssText='display:block;width:'+fw+'px;height:'+fh+'px;border-radius:7px;image-rendering:high-quality;';
+    var ctx=canvas.getContext('2d');
+    ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+    ctx.scale(dpr,dpr);
+    if(photoMode==='contain'){
+      var r=Math.min(fw/img.naturalWidth,fh/img.naturalHeight)*sc;
+      ctx.drawImage(img,(fw-img.naturalWidth*r)/2+ox,(fh-img.naturalHeight*r)/2+oy,img.naturalWidth*r,img.naturalHeight*r);
+    }else{
+      var r2=Math.max(fw/img.naturalWidth,fh/img.naturalHeight)*sc;
+      ctx.drawImage(img,(fw-img.naturalWidth*r2)/2+ox,(fh-img.naturalHeight*r2)/2+oy,img.naturalWidth*r2,img.naturalHeight*r2);
+    }
+    frame.appendChild(canvas);
+  };
+  img.src=photoSrc;
+}
+function resetPhoto(){document.getElementById('imgScale').value=100;document.getElementById('imgX').value=0;document.getElementById('imgY').value=0;updatePhotoCanvas();}
+
+// ── BACK IMAGE: contain mode, never distorts ──
+function loadBackImg(e){
+  var f=e.target.files[0];if(!f)return;
   var r=new FileReader();
-  r.onload=function(ev){ document.getElementById('backImgFrame').innerHTML='<img src="'+ev.target.result+'" style="width:100%;height:100%;object-fit:cover;">'; document.getElementById('backImgLbl').textContent='✓ تم رفع الصورة'; };
+  r.onload=function(ev){
+    backImgSrc=ev.target.result;
+    document.getElementById('backImgLbl').textContent='✓ تم الرفع';
+    document.getElementById('backUpl').classList.add('uploaded');
+    document.getElementById('backPhotoCtrl').style.display='block';
+    document.getElementById('backImgScale').value=100;
+    document.getElementById('backImgX').value=0;
+    document.getElementById('backImgY').value=0;
+    updateBackImgCanvas();
+  };
   r.readAsDataURL(f);
+  e.target.value='';
 }
-function updateBackImgSize(){ var sz=parseInt(document.getElementById('backImgSize').value)||60; document.getElementById('backImgSizeVal').textContent=sz+'px'; var f=document.getElementById('backImgFrame'); f.style.width=sz+'px'; f.style.height=sz+'px'; }
 
-// ===== QR =====
-function loadQRImg(e) {
-  var f=e.target.files[0]; if(!f) return;
+function updateBackImgSize(){
+  var sz=parseInt(document.getElementById('backImgSize').value)||60;
+  document.getElementById('backImgSizeVal').textContent=sz+'px';
+  var f=document.getElementById('backImgFrame');
+  f.style.width=sz+'px';
+  f.style.height=sz+'px';
+  updateBackImgCanvas();
+}
+
+function updateBackImgCanvas(){
+  var frame=document.getElementById('backImgFrame');
+  if(!backImgSrc){return;}
+  frame.innerHTML='';
+  var fw=frame.offsetWidth||parseInt(frame.style.width)||60;
+  var fh=frame.offsetHeight||parseInt(frame.style.height)||60;
+  var sc=parseInt(document.getElementById('backImgScale').value)/100;
+  var ox=parseInt(document.getElementById('backImgX').value);
+  var oy=parseInt(document.getElementById('backImgY').value);
+  document.getElementById('backScaleVal').textContent=Math.round(sc*100)+'%';
+  document.getElementById('backXVal').textContent=ox;
+  document.getElementById('backYVal').textContent=oy;
+  var img=new Image();
+  img.onload=function(){
+    var dpr=Math.max(window.devicePixelRatio||1,4);
+    var canvas=document.createElement('canvas');
+    canvas.width=fw*dpr;canvas.height=fh*dpr;
+    canvas.style.cssText='display:block;width:'+fw+'px;height:'+fh+'px;';
+    var ctx=canvas.getContext('2d');
+    ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+    ctx.scale(dpr,dpr);
+    if(backImgMode==='contain'){
+      var r=Math.min(fw/img.naturalWidth,fh/img.naturalHeight)*sc;
+      ctx.drawImage(img,(fw-img.naturalWidth*r)/2+ox,(fh-img.naturalHeight*r)/2+oy,img.naturalWidth*r,img.naturalHeight*r);
+    }else{
+      var r2=Math.max(fw/img.naturalWidth,fh/img.naturalHeight)*sc;
+      ctx.drawImage(img,(fw-img.naturalWidth*r2)/2+ox,(fh-img.naturalHeight*r2)/2+oy,img.naturalWidth*r2,img.naturalHeight*r2);
+    }
+    frame.appendChild(canvas);
+  };
+  img.src=backImgSrc;
+}
+
+function resetBackPhoto(){
+  document.getElementById('backImgScale').value=100;
+  document.getElementById('backImgX').value=0;
+  document.getElementById('backImgY').value=0;
+  updateBackImgCanvas();
+}
+
+function loadQRImg(e){
+  var f=e.target.files[0];if(!f)return;
   var r=new FileReader();
-  r.onload=function(ev){ var sz=parseInt(document.getElementById('qrSize').value)||109; var frame=document.getElementById('qrFrame'); frame.style.width=sz+'px'; frame.style.height=sz+'px'; frame.innerHTML='<img src="'+ev.target.result+'" style="width:100%;height:100%;object-fit:contain;display:block;">'; document.getElementById('qrImgLbl').textContent='✓ تم رفع QR Code'; };
+  r.onload=function(ev){
+    var sz=parseInt(document.getElementById('qrSize').value)||109;
+    var frame=document.getElementById('qrFrame');
+    frame.style.width=sz+'px';frame.style.height=sz+'px';
+    frame.innerHTML='<img src="'+ev.target.result+'" style="width:100%;height:100%;object-fit:contain;display:block;">';
+    document.getElementById('qrImgLbl').textContent='✓ تم رفع QR';
+    document.getElementById('qrUpl').classList.add('uploaded');
+  };
   r.readAsDataURL(f);
+  e.target.value='';
 }
-function updateQRSize(){ var sz=parseInt(document.getElementById('qrSize').value)||109; document.getElementById('qrSizeVal').textContent=sz+'px'; var frame=document.getElementById('qrFrame'); frame.style.width=sz+'px'; frame.style.height=sz+'px'; }
+function updateQRSize(){
+  var sz=parseInt(document.getElementById('qrSize').value)||109;
+  document.getElementById('qrSizeVal').textContent=sz+'px';
+  var frame=document.getElementById('qrFrame');
+  frame.style.width=sz+'px';frame.style.height=sz+'px';
+}
 
-// ===== DRAG =====
 var isLocked=true;
 function toggleLock(){
   isLocked=!isLocked;
   var overlay=document.getElementById('backOverlay'),btn=document.getElementById('lockBtn');
-  if(isLocked){ overlay.classList.remove('editable'); document.querySelectorAll('.draggable-item').forEach(function(el){el.classList.remove('editable');}); btn.textContent='🔓 تحرير'; btn.classList.remove('locked'); }
-  else{ overlay.classList.add('editable'); document.querySelectorAll('.draggable-item').forEach(function(el){el.classList.add('editable');}); btn.textContent='🔒 قفل'; btn.classList.add('locked'); }
+  if(isLocked){
+    overlay.classList.remove('editable');
+    document.querySelectorAll('.draggable-item').forEach(function(el){el.classList.remove('editable');});
+    btn.textContent='تحرير';btn.classList.remove('locked');
+  }else{
+    overlay.classList.add('editable');
+    document.querySelectorAll('.draggable-item').forEach(function(el){el.classList.add('editable');});
+    btn.textContent='قفل';btn.classList.add('locked');
+  }
 }
 (function(){
   var dg=null,sx,sy,ol,ot;
-  document.addEventListener('mousedown',function(e){ var item=e.target.closest('.draggable-item.editable'); if(!item) return; dg=item; sx=e.clientX; sy=e.clientY; var s=window.getComputedStyle(item); ol=parseInt(s.left)||0; ot=parseInt(s.top)||0; item.style.left=ol+'px'; item.style.right='auto'; e.preventDefault(); });
-  document.addEventListener('mousemove',function(e){ if(!dg) return; dg.style.left=(ol+(e.clientX-sx))+'px'; dg.style.top=(ot+(e.clientY-sy))+'px'; });
-  document.addEventListener('mouseup',function(){ dg=null; });
-  document.addEventListener('touchstart',function(e){ var item=e.target.closest('.draggable-item.editable'); if(!item) return; dg=item; var t=e.touches[0]; sx=t.clientX; sy=t.clientY; var s=window.getComputedStyle(item); ol=parseInt(s.left)||0; ot=parseInt(s.top)||0; item.style.left=ol+'px'; item.style.right='auto'; },{passive:true});
-  document.addEventListener('touchmove',function(e){ if(!dg) return; var t=e.touches[0]; dg.style.left=(ol+(t.clientX-sx))+'px'; dg.style.top=(ot+(t.clientY-sy))+'px'; },{passive:true});
-  document.addEventListener('touchend',function(){ dg=null; });
+  document.addEventListener('mousedown',function(e){var item=e.target.closest('.draggable-item.editable');if(!item)return;dg=item;sx=e.clientX;sy=e.clientY;var s=window.getComputedStyle(item);ol=parseInt(s.left)||0;ot=parseInt(s.top)||0;item.style.right='auto';e.preventDefault();});
+  document.addEventListener('mousemove',function(e){if(!dg)return;dg.style.left=(ol+(e.clientX-sx))+'px';dg.style.top=(ot+(e.clientY-sy))+'px';});
+  document.addEventListener('mouseup',function(){dg=null;});
 })();
 
-// ===== SAVE =====
-function getScale(){ return parseInt(document.getElementById('saveScale').value)||5; }
-function saveFront(){ html2canvas(document.getElementById('cardFront'),{backgroundColor:null,scale:getScale(),useCORS:true,logging:false}).then(function(c){ var a=document.createElement('a'); a.download='anbar-front.png'; a.href=c.toDataURL('image/png'); a.click(); }); }
+function getScale(){return parseInt(document.getElementById('saveScale').value)||5;}
+function injectHighResPhoto(clonedDoc,sc){
+  clonedDoc.querySelectorAll('.drag-handle').forEach(function(el){el.style.display='none';});
+  if(!photoSrc)return;
+  var frame=clonedDoc.getElementById('c-photo');if(!frame)return;
+  var fw=parseInt(frame.style.width)||110,fh=parseInt(frame.style.height)||124;
+  var s=parseInt(document.getElementById('imgScale').value)/100;
+  var ox=parseInt(document.getElementById('imgX').value);
+  var oy=parseInt(document.getElementById('imgY').value);
+  var offCanvas=document.createElement('canvas');
+  offCanvas.width=fw*sc;offCanvas.height=fh*sc;
+  var ctx=offCanvas.getContext('2d');
+  ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+  ctx.scale(sc,sc);
+  var img=new Image();img.src=photoSrc;
+  if(photoMode==='contain'){
+    var r=Math.min(fw/img.naturalWidth,fh/img.naturalHeight)*s;
+    ctx.drawImage(img,(fw-img.naturalWidth*r)/2+ox,(fh-img.naturalHeight*r)/2+oy,img.naturalWidth*r,img.naturalHeight*r);
+  }else{
+    var r2=Math.max(fw/img.naturalWidth,fh/img.naturalHeight)*s;
+    ctx.drawImage(img,(fw-img.naturalWidth*r2)/2+ox,(fh-img.naturalHeight*r2)/2+oy,img.naturalWidth*r2,img.naturalHeight*r2);
+  }
+  frame.innerHTML='';
+  var hi=clonedDoc.createElement('img');
+  hi.src=offCanvas.toDataURL('image/png');
+  hi.style.cssText='position:absolute;top:0;left:0;width:100%;height:100%;border-radius:7px;';
+  frame.style.overflow='hidden';
+  frame.appendChild(hi);
+}
+function doCapture(element,filename,sc,done){
+  html2canvas(element,{backgroundColor:null,scale:sc,useCORS:true,allowTaint:true,logging:false,
+    onclone:function(c){injectHighResPhoto(c,sc);}
+  }).then(function(c){
+    var a=document.createElement('a');a.download=filename;a.href=c.toDataURL('image/png');a.click();
+    if(done)done();
+  });
+}
+function saveFront(){doCapture(document.getElementById('cardFront'),'anbar-front.png',getScale(),null);}
 function saveBack(){
   document.querySelectorAll('.drag-handle').forEach(function(el){el.style.display='none';});
-  html2canvas(document.getElementById('cardBack'),{backgroundColor:null,scale:getScale(),useCORS:true,logging:false}).then(function(c){ var a=document.createElement('a'); a.download='anbar-back.png'; a.href=c.toDataURL('image/png'); a.click(); document.querySelectorAll('.drag-handle').forEach(function(el){el.style.display='';}); });
+  doCapture(document.getElementById('cardBack'),'anbar-back.png',getScale(),function(){
+    document.querySelectorAll('.drag-handle').forEach(function(el){el.style.display='';});
+  });
 }
 function saveBoth(){
   var sc=getScale();
   document.querySelectorAll('.drag-handle').forEach(function(el){el.style.display='none';});
-  html2canvas(document.getElementById('cardFront'),{backgroundColor:null,scale:sc,useCORS:true,logging:false}).then(function(c1){ var a1=document.createElement('a'); a1.download='anbar-front.png'; a1.href=c1.toDataURL('image/png'); a1.click();
-    html2canvas(document.getElementById('cardBack'),{backgroundColor:null,scale:sc,useCORS:true,logging:false}).then(function(c2){ var a2=document.createElement('a'); a2.download='anbar-back.png'; a2.href=c2.toDataURL('image/png'); a2.click(); document.querySelectorAll('.drag-handle').forEach(function(el){el.style.display='';}); }); });
+  doCapture(document.getElementById('cardFront'),'anbar-front.png',sc,function(){
+    doCapture(document.getElementById('cardBack'),'anbar-back.png',sc,function(){
+      document.querySelectorAll('.drag-handle').forEach(function(el){el.style.display='';});
+    });
+  });
 }
 </script>
 </body>
